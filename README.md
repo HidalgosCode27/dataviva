@@ -1,7 +1,7 @@
 <h1 align="center">DATAVIVA</h1>
 
 <p align="center">
-  <strong>Data Analysis · Data Storyteller · Business &amp; Market Intelligence · ETL</strong><br>
+  <strong>Data Analysis · Data Storytelling · Business &amp; Market Intelligence · ETL</strong><br>
   Andrea Hidalgo, a Costa Rican data analyst based in Valencia. BI consultant, logistics operation, Oct 2026–present.
 </p>
 
@@ -20,7 +20,7 @@
   <img alt="tidyverse" src="https://img.shields.io/badge/tidyverse-1A162D?style=flat-square">
 </p>
 
-Static site (HTML, CSS, and JavaScript, no build step) for GitHub Pages as a project site. Any figure on the case pages that is not from a cited source is marked **example data**.
+Static site (HTML, CSS, and JavaScript, no build step) for GitHub Pages as a project site.
 
 ## How to turn on GitHub Pages
 

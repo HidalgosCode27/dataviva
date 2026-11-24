@@ -501,8 +501,7 @@ button:disabled {
   border-radius: 999px;
 }
 
-.pending,
-.tag-example {
+.pending {
   display: inline;
   padding: 0.08em 0.4em;
   border-radius: 5px;
@@ -512,28 +511,6 @@ button:disabled {
 .pending {
   color: var(--clay);
   background: var(--clay-soft);
-}
-
-.tag-example {
-  color: var(--lagoon-deep);
-  background: var(--mist);
-}
-
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-  list-style: none;
-  padding: 0;
-  margin: 1.4rem 0 0;
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-}
-
-.legend li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .section {
