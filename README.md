@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>Data Analysis · Data Storyteller · Business &amp; Market Intelligence · ETL</strong><br>
-  Andrea Hidalgo, a Costa Rican data analyst based in Valencia, on a placement in a logistics operation.
+  Andrea Hidalgo, a Costa Rican data analyst based in Valencia. BI consultant, logistics operation, Oct 2026–present.
 </p>
 
 <p align="center">
