@@ -111,7 +111,7 @@
 <div class="wrap">
 <div class="hero"><h1>From a Shared Spreadsheet to a Shift Reporting Database</h1>
 <p class="dek">Every shift, team leaders filled in a workbook by hand: who turned up, what moved, which machines were down. The data existed, but it was unusable — one file per site, formulas that broke, no history. Replacing the workbook with a validated form writing to a database changed what the data could be asked to do.</p></div>
-<div class="intro-note"><strong>About this page.</strong> Built as part of a logistics process-improvement project in a distribution warehouse. The company, the sites and the operational constants are deliberately not named, and every figure shown is synthetic. Credit where it is due: the Excel logic this form replicates was built by a colleague. The form itself — the interface, the validation layer, the data model and the code — is mine.</div>
+<div class="intro-note"><strong>About this page.</strong> Built as part of a logistics process-improvement project in a distribution warehouse. The company, the sites and the operational constants are deliberately not named, and every figure shown is synthetic. Credit where it is due: the Excel logic this form replicates was built by Kristofer Salcedo. The form itself — the interface, the validation layer, the data model and the code — is mine.</div>
 
 <article>
 <h2><span class="kicker">01 — The problem</span>A spreadsheet doing a job it was never built for</h2>
@@ -192,7 +192,7 @@
 <li><b>No personal data in the repository.</b><span>The roster, the equipment list and the local database file are excluded from version control by design, not by habit. The code is shareable; the data it reads is not.</span></li>
 <li><b>Locked down on the database side too.</b><span>On the hosted option, row-level security is enabled on every table with no policies attached, so the database's public API cannot read or write them at all. The application connects server-side instead. A reporting tool should not be the reason operator records become readable from the internet.</span></li>
 <li><b>Kept the Excel export.</b><span>The people who need to read the reports were spreadsheet users, and the fastest way to lose a system is to take away the format its readers trust. The export produces the same report from the database, which also makes it the migration bridge rather than a parallel process.</span></li>
-<li><b>Replicated the workbook before improving it.</b><span>The first version reproduced a colleague's formulas exactly, cell reference by cell reference, so that the output could be compared against the file people already believed. Improving the metric came after it was trusted, not before.</span></li>
+<li><b>Replicated the workbook before improving it.</b><span>The first version reproduced Kristofer Salcedo's formulas exactly, cell reference by cell reference, so that the output could be compared against the file people already believed. Improving the metric came after it was trusted, not before.</span></li>
 </ul>
 
 <h2><span class="kicker">07 — Where it stands</span>Built, running, and what comes next</h2>
@@ -203,7 +203,7 @@
 </ul>
 </article>
 
-<div class="note">Form, validation, data model and code by Andrea Hidalgo Arce; underlying Excel logic by a colleague. All figures on this page are synthetic and shown for documentation only. No company, site, system vendor, operational constant or personal data is included.</div>
+<div class="note">Form, validation, data model and code by Andrea Hidalgo Arce; underlying Excel logic by Kristofer Salcedo. All figures on this page are synthetic and shown for documentation only. No company, site, system vendor, operational constant or personal data is included.</div>
 
 </div>
     <nav class="pager" aria-label="Other cases">
