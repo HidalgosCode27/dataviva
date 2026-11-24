@@ -25,7 +25,7 @@
   <img alt="tidyverse" src="https://img.shields.io/badge/tidyverse-1A162D?style=flat-square">
 </p>
 
-Static site (HTML, CSS, and JavaScript, no build step) for GitHub Pages as a project site. Any figure on the pages is marked **example data**. Anything still missing is marked `[To do: …]`.
+Static site (HTML, CSS, and JavaScript, no build step) for GitHub Pages as a project site. Any figure on the case pages that is not from a cited source is marked **example data**.
 
 ## How to turn on GitHub Pages
 
@@ -41,5 +41,5 @@ Static site (HTML, CSS, and JavaScript, no build step) for GitHub Pages as a pro
 
 - `index.html` — home
 - `casos/` — the cases, the index, and `plantilla.html` to copy for a new case
-- `cv/` — put the PDF here and point the “Download CV” button at that file
+- `cv/andrea-hidalgo-cv.pdf` — the CV. The home button links to it directly
 - `css/`, `js/`, `img/`
