@@ -21,6 +21,19 @@
 
   syncToggle(currentTheme());
 
+  document.querySelectorAll(".portrait").forEach(function (portrait) {
+    var img = portrait.querySelector("img");
+    var fallback = portrait.querySelector(".portrait-fallback");
+    if (!img) return;
+    function useFallback() {
+      img.hidden = true;
+      portrait.classList.add("is-fallback");
+      if (fallback) fallback.hidden = false;
+    }
+    if (img.complete && img.naturalWidth === 0) useFallback();
+    img.addEventListener("error", useFallback);
+  });
+
   if (toggle) {
     toggle.addEventListener("click", function () {
       var next = currentTheme() === "dark" ? "light" : "dark";

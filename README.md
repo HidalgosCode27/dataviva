@@ -5,8 +5,8 @@
 <h1 align="center">DATAVIVA</h1>
 
 <p align="center">
-  <strong>Data, foreign trade, and business intelligence.</strong><br>
-  Andrea Hidalgo, Business Intelligence Consultant. Costa Rican, based in Valencia, currently embedded in a logistics operation.
+  <strong>Business and market intelligence, data analysis, and ETL.</strong><br>
+  Andrea Hidalgo, a Costa Rican data analyst based in Valencia, on a placement in a logistics operation.
 </p>
 
 <p align="center">
@@ -23,7 +23,6 @@
   <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white">
   <img alt="R" src="https://img.shields.io/badge/R-276DC3?style=flat-square&logo=r&logoColor=white">
   <img alt="tidyverse" src="https://img.shields.io/badge/tidyverse-1A162D?style=flat-square">
-  <img alt="Chart.js" src="https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white">
 </p>
 
 Static site (HTML, CSS, and JavaScript, no build step) for GitHub Pages as a project site. Any figure on the pages is marked **example data**. Anything still missing is marked `[To do: …]`.
