@@ -1165,6 +1165,10 @@ tr.is-flag td {
   }
 }
 
+.case-page .hero .dek {
+  color: var(--ink) !important;
+}
+
 .case-page h2 .kicker,
 .case-page .credit,
 .case-page .byline,
