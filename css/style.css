@@ -1,69 +1,80 @@
-/* Ledger: paper, lagoon, and clay. DATAVIVA's own identity. */
+/* Tinta, teja, papel prensa, monteverde. */
 
 :root {
   color-scheme: light;
-  --paper: #f3eee6;
-  --paper-deep: #e7e0d4;
-  --card: #fffaf3;
-  --ink: #1c1914;
-  --ink-soft: #4e493f;
-  --line: #d9d0c2;
-  --lagoon: #0c5c56;
-  --lagoon-deep: #084741;
-  --on-lagoon: #f7f1e6;
-  --clay: #8d3414;
-  --clay-soft: #f6e3d8;
-  --mist: #e5f1ef;
-  --gold: #8a6a2f;
-  --shadow: 0 18px 40px rgba(48, 36, 18, 0.06);
-  --code-bg: #1c1914;
-  --code-ink: #f6f0e6;
+  --tinta: #16263d;
+  --teja: #8d3414;
+  --teja-deep: #6a2810;
+  --papel: #f3ede3;
+  --monteverde: #2e5e4e;
+  --paper: var(--papel);
+  --paper-deep: #e4dace;
+  --card: #e9e0d2;
+  --ink: var(--tinta);
+  --ink-soft: var(--monteverde);
+  --line: #d2c7b6;
+  --lagoon: var(--monteverde);
+  --lagoon-deep: var(--monteverde);
+  --on-lagoon: var(--papel);
+  --clay: var(--teja);
+  --clay-soft: #f3ddd2;
+  --mist: #e7efea;
+  --gold: var(--teja);
+  --shadow: 0 18px 40px rgba(22, 38, 61, 0.06);
+  --code-bg: var(--tinta);
+  --code-ink: var(--papel);
   --radius: 18px;
   --header: 4.5rem;
-  --serif: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
-  --sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, "Source Code Pro", monospace;
+  --serif: "Newsreader", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  --sans: "Newsreader", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --paper: #121816;
-  --paper-deep: #1b2421;
-  --card: #1c2724;
-  --ink: #f4eee4;
-  --ink-soft: #cbbfae;
-  --line: #33423d;
-  --lagoon: #8ed9cf;
-  --lagoon-deep: #d7f6f1;
-  --on-lagoon: #10211e;
-  --clay: #f0b09a;
+  --teja: #e3a27c;
+  --teja-deep: #f0c2a6;
+  --monteverde: #7eae9c;
+  --paper: var(--tinta);
+  --paper-deep: #101c2e;
+  --card: #1c3050;
+  --ink: var(--papel);
+  --ink-soft: var(--monteverde);
+  --line: #2c4568;
+  --lagoon: var(--monteverde);
+  --lagoon-deep: var(--monteverde);
+  --on-lagoon: var(--tinta);
+  --clay: var(--teja);
   --clay-soft: #3a2a24;
-  --mist: #17312d;
-  --gold: #e4c98a;
+  --mist: #1a3330;
+  --gold: var(--teja);
   --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  --code-bg: #0c100f;
-  --code-ink: #f6f0e6;
+  --code-bg: #0e1828;
+  --code-ink: var(--papel);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --paper: #121816;
-    --paper-deep: #1b2421;
-    --card: #1c2724;
-    --ink: #f4eee4;
-    --ink-soft: #cbbfae;
-    --line: #33423d;
-    --lagoon: #8ed9cf;
-    --lagoon-deep: #d7f6f1;
-    --on-lagoon: #10211e;
-    --clay: #f0b09a;
+    --teja: #e3a27c;
+    --teja-deep: #f0c2a6;
+    --monteverde: #7eae9c;
+    --paper: var(--tinta);
+    --paper-deep: #101c2e;
+    --card: #1c3050;
+    --ink: var(--papel);
+    --ink-soft: var(--monteverde);
+    --line: #2c4568;
+    --lagoon: var(--monteverde);
+    --lagoon-deep: var(--monteverde);
+    --on-lagoon: var(--tinta);
+    --clay: var(--teja);
     --clay-soft: #3a2a24;
-    --mist: #17312d;
-    --gold: #e4c98a;
+    --mist: #1a3330;
+    --gold: var(--teja);
     --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-    --code-bg: #0c100f;
-    --code-ink: #f6f0e6;
+    --code-bg: #0e1828;
+    --code-ink: var(--papel);
   }
 }
 
@@ -83,13 +94,11 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--sans);
+  font-family: var(--serif);
   font-size: 1.05rem;
   line-height: 1.6;
   color: var(--ink);
-  background:
-    radial-gradient(1200px 500px at 90% -10%, rgba(12, 92, 86, 0.08), transparent 55%),
-    var(--paper);
+  background: var(--paper);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -99,18 +108,25 @@ img {
 }
 
 a {
-  color: var(--lagoon-deep);
+  color: var(--teja);
   text-underline-offset: 0.18em;
 }
 
 a:hover {
-  color: var(--clay);
+  color: var(--teja-deep);
 }
 
-h1, h2, h3, .brand, .case-link strong, .kpi-value {
+h1, h2, h3, .brand, .case-link strong {
   font-family: var(--serif);
   font-weight: 560;
   letter-spacing: -0.03em;
+}
+
+.kpi-value,
+.kpi-note,
+.stop-when,
+.case-tags span {
+  font-family: var(--mono);
 }
 
 h1, h2, h3, p {
@@ -125,8 +141,8 @@ h1 {
 
 h1 em {
   font-style: italic;
-  font-weight: 520;
-  color: var(--lagoon-deep);
+  font-weight: 500;
+  color: inherit;
 }
 
 h2 {
@@ -211,8 +227,8 @@ p {
   display: grid;
   place-items: center;
   border-radius: 10px;
-  background: var(--lagoon);
-  color: var(--on-lagoon);
+  background: var(--ink);
+  color: var(--paper);
   font-family: var(--serif);
   font-size: 0.95rem;
 }
@@ -286,7 +302,7 @@ p {
   border-radius: 50%;
   overflow: hidden;
   flex: none;
-  border: 2px solid var(--lagoon);
+  border: 2px solid var(--line);
   background:
     radial-gradient(circle at 50% 40%, var(--card), var(--mist));
   box-shadow: var(--shadow);
@@ -335,7 +351,7 @@ p {
 
 .kicker,
 .sec-kicker {
-  color: var(--clay);
+  color: var(--monteverde);
   margin-bottom: 0.8rem;
 }
 
@@ -352,7 +368,7 @@ p {
 
 .lede {
   max-width: 40rem;
-  color: var(--ink-soft);
+  color: var(--ink);
   font-size: 1.08rem;
 }
 
@@ -377,13 +393,13 @@ p {
 }
 
 .btn-primary {
-  background: var(--lagoon);
-  color: var(--on-lagoon);
+  background: #8d3414;
+  color: #f3ede3;
 }
 
 .btn-primary:hover {
-  background: var(--lagoon-deep);
-  color: var(--on-lagoon);
+  background: #6a2810;
+  color: #f3ede3;
 }
 
 .btn-ghost {
@@ -1135,8 +1151,8 @@ tr.is-flag td {
   }
 
   body {
-    background: #fff;
-    color: #000;
+    background: #f3ede3;
+    color: #16263d;
   }
 
   .js .reveal {
@@ -1145,6 +1161,24 @@ tr.is-flag td {
   }
 
   a {
-    color: #000;
+    color: #8d3414;
   }
+}
+
+.case-page h2 .kicker,
+.case-page .credit,
+.case-page .byline,
+.case-page .note,
+.case-page .chart-block .sub,
+.case-page .block .sub,
+.case-page .sub {
+  font-family: var(--mono);
+}
+
+.case-page .stat .num,
+.case-page .tn,
+.case-page .stackbar-total,
+.case-page .pallet3d-readout .val,
+.case-page .gauge-num {
+  font-family: var(--mono);
 }

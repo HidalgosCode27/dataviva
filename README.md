@@ -1,11 +1,7 @@
-<p align="center">
-  <img src="img/stamp.svg" width="120" alt="Stamp, Costa Rica to Spain, Valencia">
-</p>
-
 <h1 align="center">DATAVIVA</h1>
 
 <p align="center">
-  <strong>Business and market intelligence, data analysis, and ETL.</strong><br>
+  <strong>Data Analysis · Data Storyteller · Business &amp; Market Intelligence · ETL</strong><br>
   Andrea Hidalgo, a Costa Rican data analyst based in Valencia, on a placement in a logistics operation.
 </p>
 
