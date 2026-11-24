@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From a Shared Spreadsheet to a Shift Reporting Database · Andrea Hidalgo</title>
+  <meta name="description" content="Every shift, team leaders filled in a workbook by hand: who turned up, what moved, which machines were down. The data existed, but it was unusable — one file per site, formulas that broke, no history. Replacing the workbook with a validated form writing to a database changed…">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,520&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+
+  
+  
+  
+  
+  
+  
+  .case-page .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+  
+  
+  .case-page .hero{ padding:60px 0 20px; }
+  .case-page .hero h1{ font-family:var(--serif); font-weight:600; font-size:clamp(2rem,5vw,2.9rem); line-height:1.16; letter-spacing:-.01em; margin:0 0 20px; max-width:22ch; }
+  .case-page .hero .dek{ font-size:1.08rem; color:var(--ink-soft); max-width:66ch; margin:0 0 26px; }
+  .case-page .intro-note{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--lagoon); padding:18px 20px; margin:26px 0 8px; font-size:.92rem; color:var(--ink-soft); }
+  .case-page .intro-note strong{ color:var(--ink); font-weight:500; }
+  .case-page article{ padding:8px 0 20px; }
+  .case-page h2{ font-family:var(--serif); font-weight:600; font-size:1.5rem; margin:3em 0 .6em; line-height:1.3; }
+  .case-page h2 .kicker{ display:block; font-family:var(--sans); font-weight:500; font-size:.72rem; letter-spacing:.04em; color:var(--lagoon); margin-bottom:8px; }
+  .case-page h3{ font-size:.98rem; font-weight:600; margin:1.8em 0 .5em; }
+  .case-page p{ font-size:1rem; margin:0 0 1.1em; max-width:68ch; }
+  .case-page code{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.84em; color:var(--gold); }
+  .case-page .block{ margin:24px 0 8px; padding:22px 20px 16px; background:var(--card); border:1px solid var(--line); border-radius:2px; }
+  .case-page .block h4{ font-size:.9rem; font-weight:500; margin:0 0 4px; }
+  .case-page .block .sub{ font-size:.78rem; color:var(--ink-soft); margin-bottom:14px; }
+  .case-page .credit{ font-size:.76rem; color:var(--ink-soft); margin-top:10px; }
+  .case-page pre{ margin:0; padding:16px 18px; background:var(--paper); border:1px solid var(--line); overflow-x:auto; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.78rem; line-height:1.55; color:var(--ink); }
+  .case-page .k{ color:var(--gold); } .case-page .cm{ color:var(--ink-soft); }
+  .case-page .decisions{ list-style:none; padding:0; margin:14px 0; display:grid; gap:2px; }
+  .case-page .decisions li{ background:var(--card); border:1px solid var(--line); padding:14px 16px; font-size:.92rem; }
+  .case-page .decisions li b{ display:block; font-weight:600; margin-bottom:2px; color:var(--ink); }
+  .case-page .decisions li span{ color:var(--ink-soft); }
+  .case-page .pipe-svg{ width:100%; height:auto; }
+  .case-page .pipe-svg .arr{ stroke:var(--ink-soft); stroke-width:1.5; fill:none; }
+  .case-page .pipe-svg .t{ fill:var(--ink); font:500 14px var(--sans); }
+  .case-page .pipe-svg .ts{ fill:var(--ink-soft); font:400 12px var(--sans); }
+  .case-page .pipe-svg .src{ fill:var(--paper); stroke:var(--ink-soft); stroke-width:.8; }
+  .case-page .pipe-svg .step{ fill:var(--mist); stroke:var(--lagoon); stroke-width:.8; }
+  .case-page .pipe-svg .warn{ fill:rgba(201,162,75,.16); stroke:var(--gold); stroke-width:.8; }
+  .case-page .formula{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.86rem; background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--gold); padding:12px 16px; margin:14px 0; overflow-x:auto; }
+  .case-page .tbl-wrap{ overflow-x:auto; }
+  .case-page table.res{ width:100%; border-collapse:collapse; font-size:.82rem; min-width:560px; }
+  .case-page table.res th{ text-align:left; font-weight:500; color:var(--ink-soft); font-size:.7rem; padding:8px 10px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  .case-page table.res th.c, .case-page table.res td.c{ text-align:center; }
+  .case-page table.res td{ padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .case-page table.res td.mono{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.78rem; color:var(--gold); white-space:nowrap; }
+  .case-page table.res td.sc{ font-weight:600; }
+  .case-page .flag{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--gold); padding:16px 18px; margin:20px 0; font-size:.9rem; color:var(--ink-soft); }
+  .case-page .flag strong{ color:var(--ink); }
+  .case-page .improve{ list-style:none; padding:0; margin:14px 0; display:grid; gap:2px; }
+  .case-page .improve li{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--lagoon); padding:14px 16px; font-size:.92rem; }
+  .case-page .improve li b{ display:block; font-weight:600; margin-bottom:2px; }
+  .case-page .improve li span{ color:var(--ink-soft); }
+  .case-page .rules{ list-style:none; padding:0; margin:14px 0; display:grid; gap:2px; }
+  .case-page .rules li{ background:var(--card); border:1px solid var(--line); padding:12px 16px; font-size:.9rem; display:flex; gap:14px; align-items:baseline; }
+  .case-page .rules li span.lab{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.7rem; letter-spacing:.04em; min-width:5.5em; }
+  .case-page .rules li span.lab.err{ color:var(--clay); }
+  .case-page .rules li span.lab.warn{ color:var(--gold); }
+  .case-page .rules li span.txt{ color:var(--ink-soft); }
+  
+  .case-page .note{ background:var(--card); border:1px solid var(--line); padding:14px 16px; font-size:.8rem; color:var(--ink-soft); margin:26px 0; }
+
+  </style>
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored === "light" || stored === "dark"
+          ? stored
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (err) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">DV</span>
+        <span>Andrea Hidalgo</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#path">Path</a>
+        <a href="../index.html#cases">Cases</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke-linecap="round"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+  </header>
+  <main id="content" class="case-page">
+<div class="wrap">
+<div class="hero"><h1>From a Shared Spreadsheet to a Shift Reporting Database</h1>
+<p class="dek">Every shift, team leaders filled in a workbook by hand: who turned up, what moved, which machines were down. The data existed, but it was unusable — one file per site, formulas that broke, no history. Replacing the workbook with a validated form writing to a database changed what the data could be asked to do.</p></div>
+<div class="intro-note"><strong>About this page.</strong> Built as part of a logistics process-improvement project in a distribution warehouse. The company, the sites and the operational constants are deliberately not named, and every figure shown is synthetic. Credit where it is due: the Excel logic this form replicates was built by a colleague. The form itself — the interface, the validation layer, the data model and the code — is mine.</div>
+
+<article>
+<h2><span class="kicker">01 — The problem</span>A spreadsheet doing a job it was never built for</h2>
+<p>The shift report was a workbook with a sheet per site and a database sheet behind it. A team leader finishing a shift opened it, typed the names of the operators on shift, marked attendance and role for each one, logged incidents, ticked off the machinery, and let a column of lookups and <code>COUNTIF</code> formulas produce the shift's totals.</p>
+<p>It worked, in the sense that a number came out at the end. But as a data-capture tool it had four problems that no amount of tidying fixes. Names were typed, so the same operator existed in three spellings. Nothing was validated, so a shift could be saved with an operator marked present and no role assigned, and the totals would still compute. Each save overwrote the file, so there was no history to compare one month against another. And because every leader worked on the same file, two people reporting at the same time meant one of them lost their work.</p>
+<p>The requirement I set before writing anything: a leader should be able to file a shift report in the same few minutes it took them in the workbook, and the result should land in a database that can be queried.</p>
+
+<h2><span class="kicker">02 — What I built</span>A form at the point of capture, a database behind it</h2>
+<div class="block"><h4>Shift reporting flow</h4><div class="sub">Dashed boxes are configured but not the default deployment</div>
+<svg class="pipe-svg" viewBox="0 0 680 350" role="img" aria-label="Flow from team leader through a validated web form and calculation layer into a relational database, with Excel export and KPI dashboards as outputs">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="src" x="20" y="40" width="170" height="60" rx="8"/><text class="t" x="105" y="62" text-anchor="middle" dominant-baseline="central">Team leader</text><text class="ts" x="105" y="82" text-anchor="middle" dominant-baseline="central">One report per shift</text>
+<rect class="src" x="20" y="130" width="170" height="60" rx="8"/><text class="t" x="105" y="152" text-anchor="middle" dominant-baseline="central">Roster &amp; equipment</text><text class="ts" x="105" y="172" text-anchor="middle" dominant-baseline="central">Reference files, not in repo</text>
+<rect class="step" x="240" y="40" width="170" height="150" rx="8"/>
+<text class="t" x="325" y="66" text-anchor="middle" dominant-baseline="central">Web form</text>
+<text class="ts" x="325" y="100" text-anchor="middle" dominant-baseline="central">Pick, don't type</text>
+<text class="ts" x="325" y="130" text-anchor="middle" dominant-baseline="central">Validate before save</text>
+<text class="ts" x="325" y="160" text-anchor="middle" dominant-baseline="central">Derive the shift totals</text>
+<rect class="step" x="460" y="40" width="190" height="60" rx="8"/><text class="t" x="555" y="62" text-anchor="middle" dominant-baseline="central">Local database</text><text class="ts" x="555" y="82" text-anchor="middle" dominant-baseline="central">Default, no setup</text>
+<rect class="warn" x="460" y="130" width="190" height="60" rx="8" stroke-dasharray="4 3"/><text class="t" x="555" y="152" text-anchor="middle" dominant-baseline="central">Hosted PostgreSQL</text><text class="ts" x="555" y="172" text-anchor="middle" dominant-baseline="central">Same code, shared history</text>
+<rect class="src" x="240" y="250" width="170" height="60" rx="8"/><text class="t" x="325" y="272" text-anchor="middle" dominant-baseline="central">Excel export</text><text class="ts" x="325" y="292" text-anchor="middle" dominant-baseline="central">For spreadsheet users</text>
+<rect class="src" x="460" y="250" width="190" height="60" rx="8"/><text class="t" x="555" y="272" text-anchor="middle" dominant-baseline="central">KPI dashboards</text><text class="ts" x="555" y="292" text-anchor="middle" dominant-baseline="central">Productivity, availability</text>
+<line class="arr" x1="192" y1="70" x2="238" y2="70" marker-end="url(#ar)"/>
+<line class="arr" x1="192" y1="160" x2="238" y2="160" marker-end="url(#ar)"/>
+<line class="arr" x1="412" y1="70" x2="458" y2="70" marker-end="url(#ar)"/>
+<line class="arr" x1="412" y1="160" x2="458" y2="160" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<line class="arr" x1="325" y1="192" x2="325" y2="248" marker-end="url(#ar)"/>
+<line class="arr" x1="555" y1="192" x2="555" y2="248" marker-end="url(#ar)"/>
+</svg>
+</div>
+<p>The form is a Python application the leaders open from a shortcut — no terminal, no install steps for them. The roster and equipment list load from reference files, so the leader picks a name from a list instead of typing it, and picking their own name filters the list down to the operators in their own group: the same logic the workbook did with a nested lookup, but done once, in one place.</p>
+<p>The report itself keeps the structure the leaders already knew, because the aim was not to retrain them: shift header, their own team, support operators lent from other groups, incidents, and an equipment checklist in two categories where each machine is marked operational, awaiting maintenance or stopped.</p>
+
+<h2><span class="kicker">03 — The data model</span>Four tables instead of one sheet</h2>
+<p>The workbook flattened everything onto one row per shift, which is why nothing could be asked of it afterwards. The database splits the report into the things that actually vary in number: a shift has one header, many operators, many incidents and many machines.</p>
+<div class="block"><h4>Schema</h4><div class="sub">Child rows cascade on delete; the header is indexed by date</div>
+<div class="tbl-wrap"><table class="res"><thead><tr><th>Table</th><th>One row per</th><th>Holds</th></tr></thead><tbody>
+<tr><td class="mono">reports</td><td>shift</td><td>Date, site, leader and group, shift, administrative contact, loads, unloads, orders, bays located and pending, plus every derived total the form calculates</td></tr>
+<tr><td class="mono">report_operators</td><td>person on shift</td><td>Whether they are team, support or reconditioning, their group, attendance code and assigned role, free-text comment</td></tr>
+<tr><td class="mono">report_incidents</td><td>incident</td><td>Document reference, task, incident type, pallets affected, observations</td></tr>
+<tr><td class="mono">report_equipment</td><td>machine checked</td><td>Category, type, identifier, person responsible, operational / awaiting maintenance / stopped, observations</td></tr>
+</tbody></table></div></div>
+<p>Two design choices here matter more than the column lists. A shift is identified by date, site, leader and shift, and filing the same one twice replaces the earlier version instead of adding a second copy — the duplicate-report problem solved at the point where it was created rather than cleaned up downstream. And the whole report is written in a single transaction: a report either lands complete, with its operators, incidents and machines, or it does not land at all.</p>
+
+<h2><span class="kicker">04 — Validation</span>The rules that run before anything is saved</h2>
+<p>This is the part that changed the data quality, and it is the part a spreadsheet could never have. The form separates what it refuses from what it only flags — a hard stop on a genuine contradiction, a warning where the leader may well be right and just needs to see it.</p>
+<ul class="rules">
+<li><span class="lab err">refuses</span><span class="txt">An operator marked present with no role assigned, or a role filled in with no name against it</span></li>
+<li><span class="lab err">refuses</span><span class="txt">The same person appearing twice in one report, including the leader appearing among their own operators</span></li>
+<li><span class="lab err">refuses</span><span class="txt">A report with no operators at all</span></li>
+<li><span class="lab err">refuses</span><span class="txt">An incident missing its document reference, task or type</span></li>
+<li><span class="lab err">refuses</span><span class="txt">A time for the next inbound order with no date to go with it</span></li>
+<li><span class="lab warn">flags</span><span class="txt">A role assigned to someone recorded as absent, on leave or signed off — it still counts, but the leader is told it will</span></li>
+<li><span class="lab warn">flags</span><span class="txt">A machine marked not operational with no observation explaining why</span></li>
+<li><span class="lab warn">flags</span><span class="txt">An attendance count that does not reconcile against the sum of assigned roles</span></li>
+</ul>
+<p>That last one is the workbook's own cross-check, kept deliberately. It is a crude test — available operators should equal the roles handed out — and it catches most of what a tired leader at the end of a shift gets wrong.</p>
+
+<h2><span class="kicker">05 — What the form calculates</span>Derived once, stored, not recomputed in every report</h2>
+<p>The totals the workbook produced with formulas are computed in the application and stored on the report. The point is that the arithmetic lives in one place and the stored history does not shift when someone edits a formula.</p>
+<div class="formula">available = team − on leave − signed off − absent + support</div>
+<div class="formula">tasks = unloads + loads + orders + bays located</div>
+<div class="formula">pallets = tasks × agreed pallets-per-task factor</div>
+<div class="formula">productivity = tasks ÷ (available − reconditioning)</div>
+<div class="formula">equipment availability = operational ÷ total checked</div>
+<p>The denominator in the productivity line is the one worth defending. Operators assigned to reconditioning are present and available, but they are not doing the movements the numerator counts, so leaving them in the denominator would penalise a shift for how its people were allocated rather than how much it moved. Equipment availability is reported per category rather than as one blended figure, because the two categories fail in different ways and at different costs.</p>
+<div class="block"><h4>What a shift looks like once stored</h4><div class="sub">Synthetic numbers, to show the shape of the output</div>
+<div class="tbl-wrap"><table class="res"><thead><tr><th>Shift</th><th class="c">Available</th><th class="c">Tasks</th><th class="c">Pallets</th><th class="c">Per operator</th><th class="c">Equipment avail.</th><th class="c">Check</th></tr></thead><tbody>
+<tr><td>Morning</td><td class="c">14</td><td class="c">96</td><td class="c">2,688</td><td class="c sc">7.4</td><td class="c">92%</td><td class="c">OK</td></tr>
+<tr><td>Afternoon</td><td class="c">12</td><td class="c">81</td><td class="c">2,268</td><td class="c sc">7.4</td><td class="c">85%</td><td class="c">OK</td></tr>
+<tr><td>Night</td><td class="c">9</td><td class="c">48</td><td class="c">1,344</td><td class="c sc">6.0</td><td class="c">85%</td><td class="c">review</td></tr>
+</tbody></table></div>
+<div class="credit">Synthetic data. Three shifts of one site, as the dashboards read them.</div></div>
+
+<h2><span class="kicker">06 — Decisions that mattered</span>Choices I would defend in a review</h2>
+<ul class="decisions">
+<li><b>One codebase, two databases.</b><span>The application talks to its database through a single abstraction layer. With nothing configured it writes to a local file, so it runs on a laptop with no setup and no account. Given a connection string it writes to hosted PostgreSQL instead, with no change to the code. That meant the form could be tested and used before anyone had to approve infrastructure — and the migration path was already there.</span></li>
+<li><b>No personal data in the repository.</b><span>The roster, the equipment list and the local database file are excluded from version control by design, not by habit. The code is shareable; the data it reads is not.</span></li>
+<li><b>Locked down on the database side too.</b><span>On the hosted option, row-level security is enabled on every table with no policies attached, so the database's public API cannot read or write them at all. The application connects server-side instead. A reporting tool should not be the reason operator records become readable from the internet.</span></li>
+<li><b>Kept the Excel export.</b><span>The people who need to read the reports were spreadsheet users, and the fastest way to lose a system is to take away the format its readers trust. The export produces the same report from the database, which also makes it the migration bridge rather than a parallel process.</span></li>
+<li><b>Replicated the workbook before improving it.</b><span>The first version reproduced a colleague's formulas exactly, cell reference by cell reference, so that the output could be compared against the file people already believed. Improving the metric came after it was trusted, not before.</span></li>
+</ul>
+
+<h2><span class="kicker">07 — Where it stands</span>Built, running, and what comes next</h2>
+<ul class="improve">
+<li><b>Built.</b><span>The form, the validation layer, the schema, the local and hosted storage paths, the Excel export and the shortcut the leaders use. Shift reports now accumulate as history rather than overwriting one file.</span></li>
+<li><b>Feeding downstream.</b><span>Stored shifts are what the productivity and equipment-availability dashboards read, which is what made comparing shifts, teams and operators possible in the first place.</span></li>
+<li><b>Next.</b><span>Authentication per leader so the report records who filed it rather than who it says filed it; a correction trail instead of a silent replace; and the data-quality checks that belong in the database rather than the form — operators appearing on shifts after they leave the roster, shifts filed for dates with no operation, equipment identifiers that stop matching the asset list.</span></li>
+</ul>
+</article>
+
+<div class="note">Form, validation, data model and code by Andrea Hidalgo Arce; underlying Excel logic by a colleague. All figures on this page are synthetic and shown for documentation only. No company, site, system vendor, operational constant or personal data is included.</div>
+
+</div>
+    <nav class="pager" aria-label="Other cases">
+      <a href="mapping-chokepoints.html">← Mapping Chokepoints: A Supply Chain Risk Case Study</a>
+      <a href="../index.html#cases">Back to all cases</a>
+      <a href="field-to-database.html">From the Field to the Database: Two Data Pipelines for Assistance Programs →</a>
+    </nav>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Andrea Hidalgo · Valencia</p>
+      <p><a href="../index.html">Home</a></p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

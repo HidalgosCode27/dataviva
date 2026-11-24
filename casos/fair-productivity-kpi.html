@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Warehouse Transactions to a Fair Productivity KPI · Andrea Hidalgo</title>
+  <meta name="description" content="A warehouse system records every movement. Turning those movements into a productivity measure that is fair to each team and each operator takes more than a pivot table: shifts, rosters and real hours worked have to be joined to the transactions first.">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,520&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+
+  
+  
+  
+  
+  
+  
+  .case-page .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+  
+  
+  .case-page .hero{ padding:60px 0 20px; }
+  .case-page .hero h1{ font-family:var(--serif); font-weight:600; font-size:clamp(2rem,5vw,2.9rem); line-height:1.16; letter-spacing:-.01em; margin:0 0 20px; max-width:20ch; }
+  .case-page .hero .dek{ font-size:1.08rem; color:var(--ink-soft); max-width:66ch; margin:0 0 26px; }
+  .case-page .intro-note{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--lagoon); padding:18px 20px; margin:26px 0 8px; font-size:.92rem; color:var(--ink-soft); }
+  .case-page .intro-note strong{ color:var(--ink); font-weight:500; }
+  .case-page article{ padding:8px 0 20px; }
+  .case-page h2{ font-family:var(--serif); font-weight:600; font-size:1.5rem; margin:3em 0 .6em; line-height:1.3; }
+  .case-page h2 .kicker{ display:block; font-family:var(--sans); font-weight:500; font-size:.72rem; letter-spacing:.04em; color:var(--lagoon); margin-bottom:8px; }
+  .case-page h3{ font-size:.98rem; font-weight:600; margin:1.8em 0 .5em; }
+  .case-page p{ font-size:1rem; margin:0 0 1.1em; max-width:68ch; }
+  .case-page code{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.84em; color:var(--gold); }
+  .case-page .block{ margin:24px 0 8px; padding:22px 20px 16px; background:var(--card); border:1px solid var(--line); border-radius:2px; }
+  .case-page .block h4{ font-size:.9rem; font-weight:500; margin:0 0 4px; }
+  .case-page .block .sub{ font-size:.78rem; color:var(--ink-soft); margin-bottom:14px; }
+  .case-page .credit{ font-size:.76rem; color:var(--ink-soft); margin-top:10px; }
+  .case-page pre{ margin:0; padding:16px 18px; background:var(--paper); border:1px solid var(--line); overflow-x:auto; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.78rem; line-height:1.55; color:var(--ink); }
+  .case-page .k{ color:var(--gold); } .case-page .cm{ color:var(--ink-soft); }
+  .case-page .decisions{ list-style:none; padding:0; margin:14px 0; display:grid; gap:2px; }
+  .case-page .decisions li{ background:var(--card); border:1px solid var(--line); padding:14px 16px; font-size:.92rem; }
+  .case-page .decisions li b{ display:block; font-weight:600; margin-bottom:2px; color:var(--ink); }
+  .case-page .decisions li span{ color:var(--ink-soft); }
+  .case-page .pipe-svg{ width:100%; height:auto; }
+  .case-page .pipe-svg .arr{ stroke:var(--ink-soft); stroke-width:1.5; fill:none; }
+  .case-page .pipe-svg .t{ fill:var(--ink); font:500 14px var(--sans); }
+  .case-page .pipe-svg .ts{ fill:var(--ink-soft); font:400 12px var(--sans); }
+  .case-page .pipe-svg .src{ fill:var(--paper); stroke:var(--ink-soft); stroke-width:.8; }
+  .case-page .pipe-svg .step{ fill:var(--mist); stroke:var(--lagoon); stroke-width:.8; }
+  .case-page .pipe-svg .warn{ fill:rgba(201,162,75,.16); stroke:var(--gold); stroke-width:.8; }
+  .case-page .tiers{ list-style:none; padding:0; margin:12px 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2px; }
+  .case-page .tiers li{ background:var(--card); border:1px solid var(--line); padding:10px 14px; font-size:.86rem; display:flex; gap:12px; align-items:baseline; }
+  .case-page .tn{ font-family:var(--serif); font-weight:600; color:var(--gold); font-size:1.1rem; width:1.2em; }
+  .case-page .formula{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.86rem; background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--gold); padding:12px 16px; margin:14px 0; overflow-x:auto; }
+  .case-page .tbl-wrap{ overflow-x:auto; }
+  .case-page table.res{ width:100%; border-collapse:collapse; font-size:.82rem; min-width:560px; }
+  .case-page table.res th{ text-align:left; font-weight:500; color:var(--ink-soft); font-size:.7rem; padding:8px 10px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  .case-page table.res th.c, .case-page table.res td.c{ text-align:center; }
+  .case-page table.res td{ padding:8px 10px; border-bottom:1px solid var(--line); }
+  .case-page table.res td.rk{ font-family:var(--serif); font-weight:600; color:var(--gold); }
+  .case-page table.res td.sc{ font-weight:600; }
+  .case-page table.res tr.hl td{ background:rgba(201,162,75,.12); }
+  .case-page .flag{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--gold); padding:16px 18px; margin:20px 0; font-size:.9rem; color:var(--ink-soft); }
+  .case-page .flag strong{ color:var(--ink); }
+  .case-page .improve{ list-style:none; padding:0; margin:14px 0; display:grid; gap:2px; }
+  .case-page .improve li{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--lagoon); padding:14px 16px; font-size:.92rem; }
+  .case-page .improve li b{ display:block; font-weight:600; margin-bottom:2px; }
+  .case-page .improve li span{ color:var(--ink-soft); }
+  
+  .case-page .note{ background:var(--card); border:1px solid var(--line); padding:14px 16px; font-size:.8rem; color:var(--ink-soft); margin:26px 0; }
+
+
+  </style>
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored === "light" || stored === "dark"
+          ? stored
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (err) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">DV</span>
+        <span>Andrea Hidalgo</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#path">Path</a>
+        <a href="../index.html#cases">Cases</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke-linecap="round"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+  </header>
+  <main id="content" class="case-page">
+<div class="wrap">
+<div class="hero"><h1>From Warehouse Transactions to a Fair Productivity KPI</h1>
+<p class="dek">A warehouse system records every movement. Turning those movements into a productivity measure that is fair to each team and each operator takes more than a pivot table: shifts, rosters and real hours worked have to be joined to the transactions first.</p></div>
+<div class="intro-note"><strong>About this page.</strong> This is an ETL I am building as part of a logistics process-improvement project in two distribution warehouses. It is work in progress, and the numbers below are synthetic. The company, the system vendor, the sites and the people are deliberately not named.</div>
+
+<article>
+<h2><span class="kicker">01 — The question</span>How productive is each team, and each person in it?</h2>
+<p>The business question sounds simple: how many movements does a team complete per hour? The answer depends on two things the warehouse system does not hold by itself: who was actually working in each shift, and for how many hours. The system knows what moved and when, and which user did it. The roster knows who belonged to which team. The time and attendance record knows how long they were there. The ETL's job is to bring the three together.</p>
+<p>One constraint shaped the design: there is no direct access to the warehouse database. Data arrives as exports, either downloaded by me from the transactions screen or extracted by IT on request. So the pipeline is built around files, and built so that replacing the manual export with an automated one changes only the first step.</p>
+
+<h2><span class="kicker">02 — The pipeline</span>Three sources, one model, one KPI</h2>
+<div class="block"><h4>Productivity pipeline</h4><div class="sub">Dashed boxes are planned and not live yet</div>
+<svg class="pipe-svg" viewBox="0 0 680 390" role="img" aria-label="ETL flow from warehouse system exports, shift roster and hours worked through Power Query to a KPI table and dashboard">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="src" x="20" y="30" width="180" height="60" rx="8"/><text class="t" x="110" y="52" text-anchor="middle" dominant-baseline="central">WMS transactions</text><text class="ts" x="110" y="72" text-anchor="middle" dominant-baseline="central">Weekly export per site</text>
+<rect class="src" x="20" y="104" width="180" height="60" rx="8"/><text class="t" x="110" y="126" text-anchor="middle" dominant-baseline="central">Shift roster</text><text class="ts" x="110" y="146" text-anchor="middle" dominant-baseline="central">Teams and attendance</text>
+<rect class="src" x="20" y="178" width="180" height="60" rx="8"/><text class="t" x="110" y="200" text-anchor="middle" dominant-baseline="central">Clocked hours</text><text class="ts" x="110" y="220" text-anchor="middle" dominant-baseline="central">Hours actually worked</text>
+<rect class="warn" x="20" y="252" width="180" height="60" rx="8" stroke-dasharray="4 3"/><text class="t" x="110" y="274" text-anchor="middle" dominant-baseline="central">Automated extraction</text><text class="ts" x="110" y="294" text-anchor="middle" dominant-baseline="central">History + daily load</text>
+<rect class="step" x="250" y="30" width="180" height="282" rx="8"/>
+<text class="t" x="340" y="62" text-anchor="middle" dominant-baseline="central">Power Query in Excel</text>
+<text class="ts" x="340" y="112" text-anchor="middle" dominant-baseline="central">Filter movement types</text>
+<text class="ts" x="340" y="152" text-anchor="middle" dominant-baseline="central">Assign each shift</text>
+<text class="ts" x="340" y="192" text-anchor="middle" dominant-baseline="central">Map user to team</text>
+<text class="ts" x="340" y="232" text-anchor="middle" dominant-baseline="central">Join hours worked</text>
+<text class="ts" x="340" y="282" text-anchor="middle" dominant-baseline="central">Refresh on new export</text>
+<rect class="step" x="480" y="30" width="180" height="60" rx="8"/><text class="t" x="570" y="52" text-anchor="middle" dominant-baseline="central">KPI table</text><text class="ts" x="570" y="72" text-anchor="middle" dominant-baseline="central">Movements per real hour</text>
+<rect class="step" x="480" y="140" width="180" height="60" rx="8"/><text class="t" x="570" y="162" text-anchor="middle" dominant-baseline="central">Excel dashboard</text><text class="ts" x="570" y="182" text-anchor="middle" dominant-baseline="central">By team, then operator</text>
+<rect class="warn" x="480" y="252" width="180" height="60" rx="8" stroke-dasharray="4 3"/><text class="t" x="570" y="274" text-anchor="middle" dominant-baseline="central">Power BI</text><text class="ts" x="570" y="294" text-anchor="middle" dominant-baseline="central">Planned, same model</text>
+<line class="arr" x1="202" y1="60" x2="248" y2="60" marker-end="url(#ar)"/><line class="arr" x1="202" y1="134" x2="248" y2="134" marker-end="url(#ar)"/><line class="arr" x1="202" y1="208" x2="248" y2="208" marker-end="url(#ar)"/><line class="arr" x1="202" y1="282" x2="248" y2="282" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<line class="arr" x1="432" y1="60" x2="478" y2="60" marker-end="url(#ar)"/><line class="arr" x1="432" y1="170" x2="478" y2="170" marker-end="url(#ar)"/><line class="arr" x1="432" y1="282" x2="478" y2="282" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<rect class="step" x="100" y="352" width="12" height="12" rx="2"/><text class="ts" x="120" y="358" dominant-baseline="central">Pipeline step</text>
+<rect class="src" x="250" y="352" width="12" height="12" rx="2"/><text class="ts" x="270" y="358" dominant-baseline="central">Source</text>
+<rect class="warn" x="370" y="352" width="12" height="12" rx="2" stroke-dasharray="3 2"/><text class="ts" x="390" y="358" dominant-baseline="central">Planned, not live yet</text>
+</svg>
+</div>
+<p>Everything transforms in Power Query, so a new export refreshes the whole model without rebuilding formulas. The dashed boxes are the next iteration: IT has started on an automated extraction (history plus a daily load of the previous day), and the same model is meant to feed Power BI once it is available.</p>
+
+<h2><span class="kicker">03 — The metric</span>One KPI, specified before it was built</h2>
+<div class="block"><h4>KPI specification</h4><div class="sub">Name, formula, source, frequency, unit and alert threshold</div>
+<div class="tbl-wrap"><table class="res"><thead><tr><th>Field</th><th>Definition</th></tr></thead><tbody>
+<tr><td>Name</td><td>Movements per real hour</td></tr>
+<tr><td>Formula</td><td>(loading movements + receiving movements) ÷ hours actually clocked</td></tr>
+<tr><td>Source</td><td>Warehouse system transactions, shift roster, time and attendance record</td></tr>
+<tr><td>Frequency</td><td>Refreshed weekly, read monthly</td></tr>
+<tr><td>Unit</td><td>Movements per person-hour</td></tr>
+<tr><td>Alert threshold</td><td>To be set after a baseline period, not before</td></tr>
+</tbody></table></div></div>
+
+<h3>Decisions that changed the number</h3>
+<ul class="decisions">
+<li><b>Real hours, not theoretical hours.</b><span>The first version divided by operators present multiplied by shift length, minus stoppages. Operations pointed out that this overstates the denominator, so the KPI now divides by hours actually clocked.</span></li>
+<li><b>Team first, then person.</b><span>Operations wanted productivity by team and, inside each team, by operator, so the model keeps the user on every movement and rolls up from there.</span></li>
+<li><b>Net and gross, side by side.</b><span>Monthly productivity is shown net (only the teams that worked) and gross (all four teams, including the one on rest), because the two answer different questions: how fast the working teams are, and what the whole structure delivers.</span></li>
+<li><b>Presence comes from the data.</b><span>An operator counts as present in a shift when they appear on movements in that shift, cross-checked against the roster instead of trusted blindly.</span></li>
+<li><b>Team leaders stay in the denominator.</b><span>They are part of the hours the shift consumes, so leaving them out would flatter the result.</span></li>
+</ul>
+
+<h2><span class="kicker">04 — What the output looks like</span>The same table, one level down</h2>
+<div class="block"><h4>Monthly productivity by team</h4><div class="sub">Synthetic numbers, to show the shape of the output</div>
+<div class="tbl-wrap"><table class="res"><thead><tr><th>Team</th><th class="c">Loading</th><th class="c">Receiving</th><th class="c">Total movements</th><th class="c">Hours clocked</th><th class="c">Per real hour</th></tr></thead><tbody>
+<tr><td>Team A</td><td class="c">11,400</td><td class="c">3,900</td><td class="c">15,300</td><td class="c">1,310</td><td class="c sc">11.7</td></tr>
+<tr><td>Team B</td><td class="c">10,200</td><td class="c">4,300</td><td class="c">14,500</td><td class="c">1,280</td><td class="c sc">11.3</td></tr>
+<tr><td>Team C</td><td class="c">12,600</td><td class="c">3,400</td><td class="c">16,000</td><td class="c">1,350</td><td class="c sc">11.9</td></tr>
+<tr><td>Team D</td><td class="c">8,900</td><td class="c">3,600</td><td class="c">12,500</td><td class="c">1,260</td><td class="c sc">9.9</td></tr>
+</tbody></table></div>
+<div class="credit">Synthetic data. In the model each row opens into its operators, with the same calculation per person.</div></div>
+
+<h2><span class="kicker">05 — Where it stands</span>What is built and what is next</h2>
+<ul class="improve">
+<li><b>Built or in progress.</b><span>The KPI is defined and agreed with operations. The Excel dashboard is being built and refreshes weekly from the export. The shift roster exists, and a shift attendance log is being piloted.</span></li>
+<li><b>Started with IT.</b><span>Automating the extraction: the history already stored, plus a daily load of the previous day.</span></li>
+<li><b>Next.</b><span>Move the same model to Power BI when access is available, and add the data-quality checks the model needs: users in the transactions who are missing from the roster, movements without a timestamp or outside the three shift windows, duplicates created by overlapping weekly downloads, and people present with no hours clocked.</span></li>
+</ul>
+</article>
+
+<div class="note">Work in progress, written by Andrea Hidalgo Arce. All figures on this page are synthetic and shown for documentation. No company, system vendor, site or personal data is included.</div>
+
+</div>
+    <nav class="pager" aria-label="Other cases">
+      <a href="field-to-database.html">← From the Field to the Database: Two Data Pipelines for Assistance Programs</a>
+      <a href="../index.html#cases">Back to all cases</a>
+      <a href="debt-behind-the-miracle.html">The Debt Behind the Miracle →</a>
+    </nav>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Andrea Hidalgo · Valencia</p>
+      <p><a href="../index.html">Home</a></p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

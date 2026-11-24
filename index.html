@@ -183,11 +183,10 @@
               <p class="stop-code">PL</p>
               <div>
                 <h3>Placement</h3>
-                <p>Inside a logistics operation, building the reporting it didn’t have. Valencia. <span class="pending">[To do: period]</span> Three cases come out of this work:</p>
+                <p>Inside a logistics operation, building the reporting it didn’t have. Valencia. <span class="pending">[To do: period]</span> Two cases come out of this work:</p>
                 <ul>
-                  <li><a href="casos/productividad-almacen.html">Shift productivity</a></li>
-                  <li><a href="casos/formulario-jefes-turno.html">Shift-lead form</a></li>
-                  <li><a href="casos/conciliacion-stock.html">Stock reconciliation</a></li>
+                  <li><a href="casos/shift-reporting-database.html">From a Shared Spreadsheet to a Shift Reporting Database</a></li>
+                  <li><a href="casos/fair-productivity-kpi.html">From Warehouse Transactions to a Fair Productivity KPI</a></li>
                 </ul>
               </div>
             </li>
@@ -200,63 +199,104 @@
       <div class="wrap">
         <div class="section-head">
           <p class="sec-kicker">Cases</p>
-          <h2>Three lines of work.</h2>
-          <p>Each page uses the same frame: context, problem, what I did, tools, and result. If you see a number, it is example data.</p>
+          <h2>Four lines of work.</h2>
+          <p>Nine cases. Where a figure is synthetic or a source is missing, the page says so.</p>
         </div>
 
-        <article class="front reveal" id="dashboards">
-          <div class="front-brand">
-            <img src="img/bay.svg" width="64" height="64" alt="">
-            <h3>Dashboards and BI</h3>
-          </div>
-          <div>
-            <a class="case-link" href="casos/productividad-almacen.html">
-              <span>
-                <strong>Shift productivity <span aria-hidden="true">→</span></strong>
-                <small>Excel and Power Query, for a bonus system and for spotting anomalies.</small>
-              </span>
-            </a>
-            <a class="case-link" href="casos/formulario-jefes-turno.html">
-              <span>
-                <strong>Shift-lead form <span aria-hidden="true">→</span></strong>
-                <small>Streamlit, SQLite, and a duplicate rule: date + lead + shift.</small>
-              </span>
-            </a>
-          </div>
-        </article>
-
-        <article class="front reveal" id="reports">
+        <article class="front reveal" id="markets">
           <div class="front-brand">
             <img src="img/chart.svg" width="64" height="64" alt="">
-            <h3>Reports and analysis</h3>
+            <h3>Business and market intelligence</h3>
           </div>
           <div>
-            <a class="case-link" href="casos/semiconductores-corea.html">
+            <a class="case-link" href="casos/mapping-competition.html">
               <span>
-                <strong>Semiconductors, South Korea <span aria-hidden="true">→</span></strong>
-                <small>A trade analysis. The chart on the page is an invented series.</small>
+                <strong>Mapping the Competition Before You Launch <span aria-hidden="true">→</span></strong>
+                <small>Before a Valencian bike-helmet brand enters Bogotá, this piece maps who's already there — on price, on perceived innovation, and on the digital visibility that decides whether a new entrant gets found at all.</small>
+                <span class="case-tags"><span>Competitive intelligence</span><span>Market entry</span></span>
               </span>
             </a>
-            <a class="case-link" href="casos/deuda-hogares.html">
+            <a class="case-link" href="casos/three-markets.html">
               <span>
-                <strong>Household debt <span aria-hidden="true">→</span></strong>
-                <small>Macro, demographics, and public policy.</small>
+                <strong>Three Markets, One Decision: Why the Scorecard Didn't Win <span aria-hidden="true">→</span></strong>
+                <small>Score Japan, Singapore and Colombia against the same ten market-entry criteria, and Colombia comes out lowest of the three.</small>
+                <span class="case-tags"><span>Market selection</span><span>Scorecard</span></span>
               </span>
-              <span class="badge">In progress</span>
+            </a>
+            <a class="case-link" href="casos/landed-cost.html">
+              <span>
+                <strong>The Real Cost of Crossing a Border: A Landed-Cost Case Study <span aria-hidden="true">→</span></strong>
+                <small>A €89.90 product becomes a €95.00 landed price by the time it reaches a customer 8,000 km away.</small>
+                <span class="case-tags"><span>Landed cost</span><span>Export logistics</span></span>
+              </span>
+            </a>
+            <a class="case-link" href="casos/mapping-chokepoints.html">
+              <span>
+                <strong>Mapping Chokepoints: A Supply Chain Risk Case Study <span aria-hidden="true">→</span></strong>
+                <small>Using South Korea's semiconductor exports as the test case, this piece builds a structural vulnerability framework — and a scorecard — for supply chains where one blocked input can shut down billions in output.</small>
+                <span class="case-tags"><span>Supply chain risk</span><span>Semiconductors</span></span>
+              </span>
             </a>
           </div>
         </article>
 
-        <article class="front reveal" id="etl">
+        <article class="front reveal" id="pipelines">
           <div class="front-brand">
             <img src="img/join.svg" width="64" height="64" alt="">
-            <h3>ETL and automation</h3>
+            <h3>Data pipelines and ETL</h3>
           </div>
           <div>
-            <a class="case-link" href="casos/conciliacion-stock.html">
+            <a class="case-link" href="casos/shift-reporting-database.html">
               <span>
-                <strong>Stock reconciliation <span aria-hidden="true">→</span></strong>
-                <small>The client’s system against the WMS, with SQL and pandas.</small>
+                <strong>From a Shared Spreadsheet to a Shift Reporting Database <span aria-hidden="true">→</span></strong>
+                <small>Replacing the workbook with a validated form writing to a database changed what the data could be asked to do.</small>
+                <span class="case-tags"><span>ETL</span><span>Shift reports</span><span>Database</span></span>
+              </span>
+            </a>
+            <a class="case-link" href="casos/field-to-database.html">
+              <span>
+                <strong>From the Field to the Database: Two Data Pipelines for Assistance Programs <span aria-hidden="true">→</span></strong>
+                <small>Assistance data collected on phones has to end up somewhere permanent, clean and queryable, and the households that need help first have to be identifiable fast.</small>
+                <span class="case-tags"><span>ETL</span><span>Data pipelines</span></span>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <article class="front reveal" id="kpis">
+          <div class="front-brand">
+            <img src="img/bay.svg" width="64" height="64" alt="">
+            <h3>BI and KPIs</h3>
+          </div>
+          <div>
+            <a class="case-link" href="casos/fair-productivity-kpi.html">
+              <span>
+                <strong>From Warehouse Transactions to a Fair Productivity KPI <span aria-hidden="true">→</span></strong>
+                <small>Turning those movements into a productivity measure that is fair to each team and each operator takes more than a pivot table: shifts, rosters and real hours worked have to be joined to the transactions first.</small>
+                <span class="case-tags"><span>Productivity KPI</span><span>Power Query</span></span>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <article class="front reveal" id="policy">
+          <div class="front-brand">
+            <img src="img/chart.svg" width="64" height="64" alt="">
+            <h3>Economic and policy reports</h3>
+          </div>
+          <div>
+            <a class="case-link" href="casos/debt-behind-the-miracle.html">
+              <span>
+                <strong>The Debt Behind the Miracle <span aria-hidden="true">→</span></strong>
+                <small>The same growth model now shows up in a different set of numbers: the highest household debt in Asia, the lowest fertility rate ever recorded, and a welfare state built for a country that no longer has the workforce to fund it.</small>
+                <span class="case-tags"><span>Household debt</span><span>Macroeconomics</span></span>
+              </span>
+            </a>
+            <a class="case-link" href="casos/migration-americas.html">
+              <span>
+                <strong>When the Route Shifts: Reading Migration in the Americas <span aria-hidden="true">→</span></strong>
+                <small>In 2024, irregular crossings fell sharply through the Darién Jungle, Honduras and the US southwest border, while irregular events in Mexico rose.</small>
+                <span class="case-tags"><span>Migration</span><span>Policy</span></span>
               </span>
             </a>
           </div>

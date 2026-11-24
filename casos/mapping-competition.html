@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapping the Competition Before You Launch · Andrea Hidalgo</title>
+  <meta name="description" content="A growing market isn't the same as an open one. Before a Valencian bike-helmet brand enters Bogotá, this piece maps who's already there — on price, on perceived innovation, and on the digital visibility that decides whether a new entrant gets found at all.">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,520&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+
+  
+  
+  
+  
+  
+  
+  .case-page .wrap{ max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+  
+  
+
+  .case-page .hero{ padding: 60px 0 20px; }
+  .case-page .hero h1{ font-family: var(--serif); font-weight: 600; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.16; letter-spacing: -0.01em; margin: 0 0 20px; max-width: 19ch; }
+  .case-page .hero .dek{ font-size: 1.08rem; color: var(--ink-soft); max-width: 66ch; margin: 0 0 26px; }
+  .case-page .byline{ font-size: 0.85rem; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 14px; }
+  .case-page .byline strong{ color: var(--ink); font-weight: 500; }
+
+  .case-page .intro-note{ background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--lagoon); padding: 18px 20px; margin: 26px 0 8px; font-size: 0.94rem; color: var(--ink-soft); }
+  .case-page .intro-note strong{ color: var(--ink); font-weight: 500; }
+
+  .case-page .stat-row{ display: flex; gap: 40px; flex-wrap: wrap; margin: 40px 0 8px; padding: 26px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .case-page .stat .num{ font-family: var(--serif); font-weight: 600; font-size: clamp(2rem, 5.2vw, 2.6rem); color: var(--gold); line-height: 1; }
+  .case-page .stat .label{ font-size: 0.82rem; color: var(--ink-soft); margin-top: 8px; max-width: 24ch; }
+
+  .case-page article{ padding: 8px 0 20px; }
+  .case-page h2{ font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 3em 0 0.6em; line-height: 1.3; }
+  .case-page h2 .kicker{ display: block; font-family: var(--sans); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.04em; color: var(--lagoon); margin-bottom: 8px; }
+  .case-page p{ font-size: 1.0rem; margin: 0 0 1.1em; max-width: 68ch; }
+  .case-page em.callout{ font-style: normal; color: var(--ink); background: linear-gradient(transparent 65%, var(--clay-soft) 65%); }
+
+  .case-page .chart-block{ margin: 26px 0 8px; padding: 22px 20px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 2px; }
+  .case-page .chart-block h3{ font-size: 0.92rem; font-weight: 500; margin: 0 0 4px; color: var(--ink); }
+  .case-page .chart-block .sub{ font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 14px; }
+  .case-page .credit{ font-size: 0.76rem; color: var(--ink-soft); margin-top: 10px; }
+
+  /* Growth line chart */
+  .case-page .growth-svg{ width: 100%; height: auto; }
+  .case-page .growth-svg .gridline{ stroke: var(--line); stroke-width: 1; }
+  .case-page .growth-svg .axis-label{ fill: var(--ink-soft); font-size: 10px; font-family: var(--sans); }
+  .case-page .growth-svg .growth-line{ fill: none; stroke: var(--gold); stroke-width: 2.5; }
+  .case-page .growth-svg .growth-area{ fill: url(#growthGrad); }
+  .case-page .growth-svg .growth-pt{ fill: var(--gold); }
+  .case-page .growth-svg .growth-pt-label{ fill: var(--ink); font-size: 11px; font-weight: 500; font-family: var(--sans); }
+
+  /* Bubble quadrant */
+  .case-page .bubble-wrap{ overflow-x: auto; }
+  .case-page .bubble-svg{ width: 100%; min-width: 520px; height: auto; }
+  .case-page .bubble-svg .axis{ stroke: var(--line); stroke-width: 1; }
+  .case-page .bubble-svg .axis-label{ fill: var(--ink-soft); font-size: 10.5px; font-family: var(--sans); }
+  .case-page .bubble-svg .quad-label{ fill: var(--ink-soft); font-size: 9.5px; font-style: italic; font-family: var(--sans); }
+  .case-page .bubble-svg .bubble{ fill-opacity: 0.82; stroke-width: 1.5; cursor: default; }
+  .case-page .bubble-svg .bubble.brand{ fill: var(--gold); stroke: var(--gold); }
+  .case-page .bubble-svg .bubble.direct{ fill: var(--clay); stroke: var(--clay); }
+  .case-page .bubble-svg .bubble.indirect{ fill: var(--lagoon); stroke: var(--lagoon); }
+  .case-page .bubble-svg .bubble.nodata{ fill: transparent; stroke: var(--ink-soft); stroke-dasharray: 3 2; }
+  .case-page .bubble-svg .b-label{ fill: var(--ink); font-size: 11px; font-weight: 500; font-family: var(--sans); }
+  .case-page .bubble-legend{ display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; font-size: 0.76rem; color: var(--ink-soft); }
+  .case-page .bubble-legend .dot{ display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .case-page .bubble-legend .dot.brand{ background: var(--gold); }
+  .case-page .bubble-legend .dot.direct{ background: var(--clay); }
+  .case-page .bubble-legend .dot.indirect{ background: var(--lagoon); }
+  .case-page .bubble-legend .dot.nodata{ background: transparent; border: 1.5px dashed var(--ink-soft); }
+
+  /* Share of voice bars */
+  .case-page .sov-row{ display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .case-page .sov-label{ width: 76px; flex-shrink: 0; font-size: 0.82rem; color: var(--ink); }
+  .case-page .sov-track{ flex: 1; height: 22px; background: var(--paper); border: 1px solid var(--line); position: relative; }
+  .case-page .sov-fill{ height: 100%; background: linear-gradient(90deg, var(--clay-soft), var(--gold)); }
+  .case-page .sov-val{ width: 100px; flex-shrink: 0; font-size: 0.8rem; color: var(--ink-soft); text-align: right; }
+  .case-page .sov-note{ font-size: 0.78rem; color: var(--ink-soft); margin-top: 6px; font-style: italic; }
+
+  /* Visibility scorecard */
+  .case-page .vis-table{ width: 100%; border-collapse: collapse; margin: 20px 0 8px; font-size: 0.82rem; }
+  .case-page .vis-table th{ text-align: left; font-weight: 500; color: var(--ink-soft); font-size: 0.7rem; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .case-page .vis-table td{ padding: 9px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .case-page .vis-table td.brand-col{ font-weight: 500; color: var(--ink); white-space: normal; }
+  .case-page .vis-table-wrap{ overflow-x: auto; }
+  .case-page .pill{ display: inline-block; padding: 2px 8px; font-size: 0.72rem; border-radius: 2px; }
+  .case-page .pill.alto{ background: var(--clay-soft); color: var(--clay); }
+  .case-page .pill.medio{ background: rgba(201,162,75,0.15); color: var(--gold); }
+  .case-page .pill.bajo{ background: rgba(92,130,168,0.15); color: var(--lagoon); }
+
+  .case-page .flag-box{ background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--gold); padding: 16px 18px; margin: 22px 0; font-size: 0.88rem; color: var(--ink-soft); }
+  .case-page .flag-box strong{ color: var(--ink); }
+
+  .case-page .takeaway-box{ background: var(--card); border: 1px solid var(--line); padding: 24px; margin: 2.5em 0; }
+  .case-page .takeaway-box h3{ font-family: var(--serif); font-size: 1.15rem; margin: 0 0 12px; font-weight: 600; }
+  .case-page .takeaway-box ul{ margin: 0; padding-left: 20px; }
+  .case-page .takeaway-box li{ margin-bottom: 10px; font-size: 0.94rem; }
+
+  
+  .case-page .note{ background: var(--card); border: 1px solid var(--line); padding: 14px 16px; font-size: 0.8rem; color: var(--ink-soft); margin: 26px 0; }
+
+  </style>
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored === "light" || stored === "dark"
+          ? stored
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (err) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">DV</span>
+        <span>Andrea Hidalgo</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#path">Path</a>
+        <a href="../index.html#cases">Cases</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke-linecap="round"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+  </header>
+  <main id="content" class="case-page">
+<div class="wrap">
+  <div class="hero">
+    <h1>Mapping the Competition Before You Launch</h1>
+    <p class="dek">A growing market isn't the same as an open one. Before a Valencian bike-helmet brand enters Bogotá, this piece maps who's already there — on price, on perceived innovation, and on the digital visibility that decides whether a new entrant gets found at all.</p>
+    <div class="byline">By <strong>Andrea Hidalgo Arce</strong> — Data &amp; International Economics</div>
+  </div>
+
+  <div class="intro-note">
+    <strong>Why this piece exists.</strong> This is adapted from a team market-internationalization project for a Valencian bike-helmet company entering Colombia, which I co-led together with a teammate — two teammates contributed additional sections of the broader report. This piece draws specifically on the competitive matrix built for the market-selection chapter (six brands scored across price, positioning, and digital presence), presented here as a standalone competitive-intelligence exercise, independent of the specific product.
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="num">$1.2B</div>
+      <div class="label">projected global bike-helmet market size by 2034, up from $870M in 2025</div>
+    </div>
+    <div class="stat">
+      <div class="num">44.4K</div>
+      <div class="label">Closca's Instagram following — roughly 7.5× its closest direct competitor</div>
+    </div>
+    <div class="stat">
+      <div class="num">0/6</div>
+      <div class="label">competitors mapped were running paid search (SEM) — the field is contested on SEO alone</div>
+    </div>
+  </div>
+
+  <article>
+    <h2><span class="kicker">01 — Size the opportunity first</span>A growing category, entered from the outside</h2>
+    <p>Before mapping who's already competing, it's worth confirming the market itself is worth competing for. The global bicycle-helmet market was valued at $870M in 2025 and is projected to reach $1.2B by 2034 — a modest but steady 3.65% CAGR. That's not explosive growth; it's the kind of category where competitive positioning, not category tailwinds, decides who wins share.</p>
+
+    <div class="chart-block">
+      <h3>Global bike-helmet market size</h3>
+      <div class="sub">USD billions, 2025–2034</div>
+      <svg class="growth-svg" viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Market growth from 870 million dollars in 2025 to 1.2 billion dollars in 2034">
+        <defs>
+          <linearGradient id="growthGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#C9A24B" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="#C9A24B" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <line class="gridline" x1="40" y1="170" x2="620" y2="170"/>
+        <line class="gridline" x1="40" y1="120" x2="620" y2="120"/>
+        <line class="gridline" x1="40" y1="70" x2="620" y2="70"/>
+        <text class="axis-label" x="8" y="174">$0.8B</text>
+        <text class="axis-label" x="8" y="124">$1.0B</text>
+        <text class="axis-label" x="8" y="74">$1.2B</text>
+        <polygon class="growth-area" points="40,170 40,168 104,164 168,157 232,150 296,142 360,134 424,126 488,116 552,105 616,92 616,220 40,220"/>
+        <polyline class="growth-line" points="40,168 104,164 168,157 232,150 296,142 360,134 424,126 488,116 552,105 616,92"/>
+        <circle class="growth-pt" cx="40" cy="168" r="3.5"/>
+        <circle class="growth-pt" cx="104" cy="164" r="3.5"/>
+        <circle class="growth-pt" cx="616" cy="92" r="3.5"/>
+        <text class="growth-pt-label" x="16" y="188">2025 · $870M</text>
+        <text class="growth-pt-label" x="82" y="182">2026 · $900M</text>
+        <text class="growth-pt-label" x="546" y="82">2034 · $1.2B</text>
+      </svg>
+      <div class="credit">2025, 2026 and 2034 figures are stated in the original research (FORTUNE Business Insights, as cited); the curve between them is the author's own reconstruction using the reported 3.65% CAGR.</div>
+    </div>
+
+    <h2><span class="kicker">02 — Price and perceived innovation don't move together</span>Where six brands actually sit</h2>
+    <p>The original report's own positioning map plotted competitors on price vs. quality — a reasonable starting point, but one that collapses "quality" and "innovation" into the same axis. Splitting them out changes the picture: Closca and LIVALL both score highest on perceived innovation, but at radically different price points and through completely different mechanisms — design and sustainability for one, hardware and connectivity for the other. Bubble size shows Instagram following where the original research reported a number.</p>
+
+    <div class="chart-block">
+      <h3>Price vs. perceived innovation, sized by social following</h3>
+      <div class="sub">Colombian market, 6 brands mapped</div>
+      <div class="bubble-wrap">
+        <svg class="bubble-svg" viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Scatter plot of price versus perceived innovation for six bike helmet brands">
+          <line class="axis" x1="70" y1="30" x2="70" y2="320"/>
+          <line class="axis" x1="70" y1="320" x2="590" y2="320"/>
+          <text class="axis-label" x="300" y="352" text-anchor="middle">Price in Colombia (COP, midpoint of stated range) →</text>
+          <text class="axis-label" x="-175" y="20" transform="rotate(-90)" text-anchor="middle">Perceived innovation →</text>
+          <text class="axis-label" x="90" y="45">Alto</text>
+          <text class="axis-label" x="90" y="175">Medio</text>
+          <text class="axis-label" x="90" y="305">Bajo</text>
+          <text class="quad-label" x="450" y="60">high price, high innovation</text>
+          <text class="quad-label" x="110" y="300">low price, low innovation</text>
+
+          <!-- YOUIN: 150k, Bajo-Medio(1.5), no follower data -->
+          <circle class="bubble nodata" cx="130" cy="253" r="14"/>
+          <text class="b-label" x="130" y="253" text-anchor="middle" dy="4" style="font-size:9px;">YOUIN</text>
+
+          <!-- B'TWIN: 175k, Bajo(1), no data -->
+          <circle class="bubble nodata" cx="145" cy="290" r="14"/>
+          <text class="b-label" x="145" y="290" text-anchor="middle" dy="4" style="font-size:9px;">B&#39;TWIN</text>
+
+          <!-- Endura: 300k, Medio(2), no data -->
+          <circle class="bubble nodata" cx="230" cy="175" r="14"/>
+          <text class="b-label" x="230" y="175" text-anchor="middle" dy="4" style="font-size:8.5px;">Endura</text>
+
+          <!-- LIVALL: 333k (from), Alto(3), 4400 followers (CO) -->
+          <circle class="bubble indirect" cx="252" cy="62" r="16"/>
+          <text class="b-label" x="252" y="40" text-anchor="middle">LIVALL</text>
+
+          <!-- FEND: 675k, Medio-Alto(2.5), 5900 followers -->
+          <circle class="bubble direct" cx="480" cy="118" r="18"/>
+          <text class="b-label" x="480" y="95" text-anchor="middle">FEND</text>
+
+          <!-- Closca: 625k, Alto(3), 44400 followers -->
+          <circle class="bubble brand" cx="450" cy="62" r="34"/>
+          <text class="b-label" x="450" y="62" text-anchor="middle" dy="4" style="font-weight:600;">Closca</text>
+        </svg>
+      </div>
+      <div class="bubble-legend">
+        <span><span class="dot brand"></span>Closca (reference brand)</span>
+        <span><span class="dot direct"></span>Direct competitor</span>
+        <span><span class="dot indirect"></span>Indirect competitor</span>
+        <span><span class="dot nodata"></span>No published follower count — bubble shown at minimum size</span>
+      </div>
+      <div class="credit">Innovation level is the author's ordinal encoding of the original report's qualitative ratings (Bajo=1, Bajo-Medio=1.5, Medio=2, Medio-Alto=2.5, Alto=3). Prices plotted at the midpoint of each brand's stated Colombian price range; LIVALL plotted at its stated starting price. B'TWIN, Endura and YOUIN had no published follower figures in the source research — only qualitative descriptors ("no aplica", "presencia débil", "muy limitada").</div>
+    </div>
+
+    <h2><span class="kicker">03 — Share of voice</span>Closca isn't winning on price. It's winning on visibility</h2>
+    <p>Of the six brands mapped, only three had a published, comparable follower count. Among those, Closca leads by a wide margin — not because it's the cheapest (it isn't) or the most technically advanced (LIVALL's Bluetooth-and-SOS system arguably is), but because its content strategy is built around lifestyle and aesthetics rather than product specs, a format that travels further on Instagram.</p>
+
+    <div class="chart-block">
+      <h3>Instagram following</h3>
+      <div class="sub">Only brands with a published figure in the source research</div>
+      <div class="sov-row">
+        <div class="sov-label">Closca</div>
+        <div class="sov-track"><div class="sov-fill" style="width: 100%;"></div></div>
+        <div class="sov-val">44,400</div>
+      </div>
+      <div class="sov-row">
+        <div class="sov-label">FEND</div>
+        <div class="sov-track"><div class="sov-fill" style="width: 13.3%;"></div></div>
+        <div class="sov-val">5,900</div>
+      </div>
+      <div class="sov-row">
+        <div class="sov-label">LIVALL</div>
+        <div class="sov-track"><div class="sov-fill" style="width: 9.9%;"></div></div>
+        <div class="sov-val">4,400 (CO)</div>
+      </div>
+      <div class="sov-note">LIVALL's global account (~9,000) isn't shown — this compares Colombia-market presence only. B'TWIN, Endura and YOUIN are excluded: no comparable figure was published for them.</div>
+    </div>
+
+    <h2><span class="kicker">04 — Where the field is actually contested</span>Nobody is paying for visibility yet</h2>
+    <p>Across all six brands, none were running visible paid search (SEM) — the entire category is competing on organic presence. That's a real opening: SEO strength varies widely (Closca and B'TWIN — via Decathlon's domain authority — both score "Alto," everyone else trails), and a category with zero paid competition is one where an above-average SEO investment goes further than in a market where competitors are already bidding on keywords.</p>
+
+    <div class="vis-table-wrap">
+      <table class="vis-table">
+        <thead><tr><th>Brand</th><th>SEO (Colombia)</th><th>SEM</th><th>Microinfluencers / UGC</th><th>Tech level</th></tr></thead>
+        <tbody>
+          <tr><td class="brand-col">Closca</td><td><span class="pill alto">Alto</span></td><td>Not visible</td><td>Not evident</td><td><span class="pill medio">Medio</span></td></tr>
+          <tr><td class="brand-col">FEND</td><td><span class="pill bajo">Bajo</span></td><td>Not visible</td><td>Low</td><td><span class="pill medio">Medio</span></td></tr>
+          <tr><td class="brand-col">LIVALL</td><td><span class="pill medio">Medio–Alto</span></td><td>Not visible</td><td>Yes</td><td><span class="pill alto">Alto</span></td></tr>
+          <tr><td class="brand-col">B&#39;TWIN Bol 500</td><td><span class="pill alto">Alto (Decathlon)</span></td><td>Not visible</td><td>No</td><td><span class="pill bajo">Bajo</span></td></tr>
+          <tr><td class="brand-col">Endura Urban Luminite</td><td><span class="pill medio">Medio</span></td><td>Not visible</td><td>No</td><td><span class="pill medio">Medio</span></td></tr>
+          <tr><td class="brand-col">YOUIN con LED</td><td><span class="pill bajo">Bajo</span></td><td>Not visible</td><td>No</td><td><span class="pill bajo">Bajo–Medio</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="credit">Author's reconstruction of Table 5 from the original research (competitor review, primary and secondary sources per brand).</div>
+
+    <div class="flag-box">
+      <strong>Worth noting.</strong> The original report contains a second, separate competitor analysis later in the document (BTWIN, Rockrider, Giro, Bunker, on a simple price-vs-quality map) built for a different chapter. This piece draws only on the earlier, more granular six-brand matrix above — the two aren't reconciled with each other in the source material, which is a genuine gap worth flagging rather than quietly merging.
+    </div>
+
+    <div class="takeaway-box">
+      <h3>What this translates to for market intelligence practice</h3>
+      <ul>
+        <li><strong>Share of voice isn't market share.</strong> Leading on followers is a distribution advantage worth having, but it's a leading indicator to validate against sales data, not a substitute for it.</li>
+        <li><strong>Collapsing "quality" and "innovation" into one axis hides real strategic differences.</strong> Two brands can both be "premium" while competing on entirely different capabilities — splitting the axes changes who you'd actually benchmark against.</li>
+        <li><strong>An uncontested channel is a temporary advantage, not a permanent one.</strong> Zero SEM activity across a category is exactly the kind of signal that should trigger a "move first" recommendation, with a clock attached — competitors can start bidding on keywords at any time.</li>
+      </ul>
+    </div>
+  </article>
+
+  <div class="note">Adapted from a team market-internationalization report for a Valencian bike-helmet company entering the Colombian market (Marketing Internacional, Universitat de València), led by Andrea Hidalgo Arce and a teammate, with contributions from two teammates. Competitive figures (prices, followers, SEO/SEM/technology ratings) are drawn directly from the report's original competitor matrix and its cited sources (brand websites, Instagram, Colombian retailers); the innovation-encoding scale, the price-vs-innovation bubble chart, and the closing analysis are the author's own.</div>
+
+  
+</div>
+    <nav class="pager" aria-label="Other cases">
+      <a href="../index.html#cases">← All cases</a>
+      <a href="../index.html#cases">Back to all cases</a>
+      <a href="three-markets.html">Three Markets, One Decision: Why the Scorecard Didn't Win →</a>
+    </nav>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Andrea Hidalgo · Valencia</p>
+      <p><a href="../index.html">Home</a></p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

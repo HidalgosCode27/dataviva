@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Real Cost of Crossing a Border: A Landed-Cost Case Study · Andrea Hidalgo</title>
+  <meta name="description" content="A €89.90 product becomes a €95.00 landed price by the time it reaches a customer 8,000 km away — and the gap isn't where most cost models assume it is. Using a Valencia-to-Bogotá market-entry case, this piece breaks down what actually drives landed cost: packaging…">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,520&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+
+  
+  
+  
+  
+  
+  
+  .case-page .wrap{ max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+  
+  
+
+  .case-page .hero{ padding: 60px 0 20px; }
+  .case-page .hero h1{ font-family: var(--serif); font-weight: 600; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.16; letter-spacing: -0.01em; margin: 0 0 20px; max-width: 19ch; }
+  .case-page .hero .dek{ font-size: 1.08rem; color: var(--ink-soft); max-width: 64ch; margin: 0 0 26px; }
+  .case-page .byline{ font-size: 0.85rem; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 14px; }
+  .case-page .byline strong{ color: var(--ink); font-weight: 500; }
+
+  .case-page .intro-note{ background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--lagoon); padding: 18px 20px; margin: 26px 0 8px; font-size: 0.94rem; color: var(--ink-soft); }
+  .case-page .intro-note strong{ color: var(--ink); font-weight: 500; }
+
+  .case-page .stat-row{ display: flex; gap: 40px; flex-wrap: wrap; margin: 40px 0 8px; padding: 26px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .case-page .stat .num{ font-family: var(--serif); font-weight: 600; font-size: clamp(2rem, 5.2vw, 2.6rem); color: var(--gold); line-height: 1; }
+  .case-page .stat .label{ font-size: 0.82rem; color: var(--ink-soft); margin-top: 8px; max-width: 24ch; }
+
+  .case-page article{ padding: 8px 0 20px; }
+  .case-page h2{ font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 3em 0 0.6em; line-height: 1.3; }
+  .case-page h2 .kicker{ display: block; font-family: var(--sans); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.04em; color: var(--lagoon); margin-bottom: 8px; }
+  .case-page p{ font-size: 1.0rem; margin: 0 0 1.1em; max-width: 68ch; }
+  .case-page em.callout{ font-style: normal; color: var(--ink); background: linear-gradient(transparent 65%, var(--clay-soft) 65%); }
+
+  .case-page .chart-block{ margin: 26px 0 8px; padding: 22px 20px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 2px; }
+  .case-page .chart-block h3{ font-size: 0.92rem; font-weight: 500; margin: 0 0 4px; color: var(--ink); }
+  .case-page .chart-block .sub{ font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 14px; }
+
+  .case-page .stackbar-group{ margin: 6px 0 4px; }
+  .case-page .stackbar-row{ display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .case-page .stackbar-label{ width: 84px; flex-shrink: 0; font-size: 0.78rem; color: var(--ink); line-height: 1.3; }
+  .case-page .stackbar-label span{ color: var(--ink-soft); font-size: 0.72rem; }
+  .case-page .stackbar-track{ flex: 1; display: flex; height: 30px; border: 1px solid var(--line); overflow: hidden; background: var(--paper); }
+  .case-page .stackbar-seg{ height: 100%; transition: width 0.2s ease; }
+  .case-page .stackbar-total{ width: 60px; flex-shrink: 0; text-align: right; font-family: var(--serif); font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+  .case-page .stackbar-total.up{ color: var(--clay); }
+  .case-page .stackbar-scale{ display: flex; justify-content: space-between; margin: 2px 98px 0 98px; font-size: 0.68rem; color: var(--ink-soft); }
+  .case-page .stackbar-legend{ display: flex; flex-wrap: wrap; gap: 14px 18px; margin-top: 16px; font-size: 0.74rem; color: var(--ink-soft); }
+  .case-page .stackbar-legend i{ display: inline-block; width: 9px; height: 9px; margin-right: 6px; vertical-align: middle; }
+  .case-page canvas{ max-width: 100%; }
+  .case-page .credit{ font-size: 0.76rem; color: var(--ink-soft); margin-top: 10px; }
+
+  .case-page .pallet3d-wrap{ display: flex; align-items: center; gap: 36px; flex-wrap: wrap; margin: 18px 0 6px; }
+  .case-page .pallet3d-scene{ perspective: 850px; width: 220px; height: 240px; flex-shrink: 0; }
+  .case-page .pallet3d{ position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-42deg) translateZ(-40px); transform-origin: center center; }
+  .case-page .p3d-layer{
+    position: absolute; left: 30px; top: 60px; width: 160px; height: 160px;
+    background: var(--mist); border: 1px solid var(--line);
+    transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+    cursor: pointer;
+  }
+  .case-page .p3d-layer:hover{ background: var(--lagoon); box-shadow: 0 0 0 2px var(--gold); transform: translateZ(var(--z)) scale(1.015); }
+  .case-page .p3d-base{
+    position: absolute; left: 14px; top: 76px; width: 192px; height: 192px;
+    background: var(--clay-soft); border: 1px solid var(--line); transform: translateZ(-16px);
+  }
+  .case-page .pallet3d-readout{ min-width: 180px; }
+  .case-page .pallet3d-readout .val{ font-family: var(--serif); font-weight: 600; font-size: 1.6rem; color: var(--gold); transition: color 0.15s; }
+  .case-page .pallet3d-readout .lbl{ font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
+  .case-page .pallet3d-readout .total{ font-size: 0.78rem; color: var(--ink-soft); margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
+
+  .case-page .cost-table{ width: 100%; border-collapse: collapse; margin: 20px 0 8px; font-size: 0.85rem; }
+  .case-page .cost-table th{ text-align: left; font-weight: 500; color: var(--ink-soft); font-size: 0.72rem; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  .case-page .cost-table td{ padding: 9px 10px; border-bottom: 1px solid var(--line); }
+  .case-page .cost-table td.num{ text-align: right; font-variant-numeric: tabular-nums; }
+  .case-page .cost-table tr.total td{ font-weight: 600; color: var(--gold); border-top: 1px solid var(--line); border-bottom: none; padding-top: 12px; }
+  .case-page .cost-table-wrap{ overflow-x: auto; }
+
+  .case-page .gauge-block{ display: flex; align-items: center; gap: 22px; margin: 20px 0 6px; flex-wrap: wrap; }
+  .case-page .gauge-track{ position: relative; width: 220px; height: 14px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .case-page .gauge-fill{ position: absolute; left: 0; top: 0; bottom: 0; background: var(--clay); }
+  .case-page .gauge-num{ font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--clay); }
+  .case-page .gauge-sub{ font-size: 0.8rem; color: var(--ink-soft); }
+
+  .case-page .flag-box{ background: var(--clay-soft); border: 1px solid var(--line); border-left: 3px solid var(--clay); padding: 16px 18px; margin: 22px 0; font-size: 0.9rem; }
+  .case-page .flag-box strong{ color: var(--ink); }
+
+  .case-page .tariff-sim{ margin: 4px 0 8px; padding: 20px 20px 18px; background: var(--card); border: 1px solid var(--line); }
+  .case-page .tariff-sim .sim-head{ font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 14px; }
+  .case-page .tariff-sim .sim-row{ display: flex; align-items: center; gap: 16px; }
+  .case-page .tariff-sim input[type=range]{ flex: 1; accent-color: var(--gold); height: 4px; }
+  .case-page .tariff-sim .pct-display{ font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--gold); width: 3.2em; text-align: right; }
+  .case-page .tariff-readout{ display: flex; gap: 32px; margin-top: 18px; flex-wrap: wrap; }
+  .case-page .tariff-readout .val{ font-family: var(--serif); font-weight: 600; font-size: 1.45rem; color: var(--ink); line-height: 1; }
+  .case-page .tariff-readout .val.up{ color: var(--clay); }
+  .case-page .tariff-readout .lbl{ font-size: 0.74rem; color: var(--ink-soft); margin-top: 5px; max-width: 18ch; }
+
+  .case-page .risk-timeline{ display: flex; gap: 2px; margin: 22px 0 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+  .case-page .risk-node{ flex: 1 0 150px; border: 1px solid var(--line); background: var(--card); border-top: 3px solid var(--line); }
+  .case-page .risk-node.seller{ border-top-color: var(--gold); }
+  .case-page .risk-node.buyer{ border-top-color: var(--lagoon); }
+  .case-page .risk-node summary{ cursor: pointer; padding: 12px 14px; font-size: 0.8rem; font-weight: 500; color: var(--ink); list-style: none; }
+  .case-page .risk-node summary::-webkit-details-marker{ display: none; }
+  .case-page .risk-node summary::before{ content: '+ '; color: var(--ink-soft); }
+  .case-page .risk-node[open] summary::before{ content: '– '; }
+  .case-page .risk-node .who{ display: inline-block; font-size: 0.65rem; padding: 2px 7px; border-radius: 2px; margin-top: 8px; }
+  .case-page .risk-node.seller .who{ background: var(--clay-soft); color: #1B1D1F; }
+  .case-page .risk-node.buyer .who{ background: var(--mist); color: #EAE7DF; }
+  .case-page .risk-node .detail{ padding: 0 14px 14px; font-size: 0.78rem; color: var(--ink-soft); }
+  .case-page .risk-legend{ display: flex; gap: 22px; margin: 10px 0 4px; font-size: 0.76rem; color: var(--ink-soft); flex-wrap: wrap; }
+  .case-page .risk-legend .dot{ display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .case-page .risk-legend .dot.seller{ background: var(--gold); }
+  .case-page .risk-legend .dot.buyer{ background: var(--lagoon); }
+
+  .case-page .takeaway-box{ background: var(--card); border: 1px solid var(--line); padding: 24px; margin: 2.5em 0; }
+  .case-page .takeaway-box h3{ font-family: var(--serif); font-size: 1.15rem; margin: 0 0 12px; font-weight: 600; }
+  .case-page .takeaway-box ul{ margin: 0; padding-left: 20px; }
+  .case-page .takeaway-box li{ margin-bottom: 10px; font-size: 0.94rem; }
+
+  
+  .case-page .note{ background: var(--card); border: 1px solid var(--line); padding: 14px 16px; font-size: 0.8rem; color: var(--ink-soft); margin: 26px 0; }
+
+  </style>
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored === "light" || stored === "dark"
+          ? stored
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (err) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">DV</span>
+        <span>Andrea Hidalgo</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#path">Path</a>
+        <a href="../index.html#cases">Cases</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke-linecap="round"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+  </header>
+  <main id="content" class="case-page">
+<div class="wrap">
+  <div class="hero">
+    <h1>The Real Cost of Crossing a Border: A Landed-Cost Case Study</h1>
+    <p class="dek">A €89.90 product becomes a €95.00 landed price by the time it reaches a customer 8,000 km away — and the gap isn't where most cost models assume it is. Using a Valencia-to-Bogotá market-entry case, this piece breaks down what actually drives landed cost: packaging engineering, freight, customs friction, and margin stacking.</p>
+    <div class="byline">By <strong>Andrea Hidalgo Arce</strong> — Data &amp; International Economics</div>
+  </div>
+
+  <div class="intro-note">
+    <strong>Why this piece exists.</strong> This is adapted from a team market-internationalization project for a Valencian company entering Colombia. I co-led the export logistics and pricing workstream — packaging, palletization, customs, and the landed-cost model — together with a teammate; two teammates contributed additional sections of the broader report. I'm presenting the logistics-and-pricing thread here because it's the part that translates directly to operational cost-to-serve analysis, independent of the specific company or product.
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="num">€95.00</div>
+      <div class="label">landed retail price in Bogotá, vs. €89.90 in the domestic market</div>
+    </div>
+    <div class="stat">
+      <div class="num">168</div>
+      <div class="label">units per pallet — the output of a cubing and palletization calculation, not a guess</div>
+    </div>
+    <div class="stat">
+      <div class="num">2.21<span style="font-size:1.1rem;color:var(--ink-soft);">/5</span></div>
+      <div class="label">Colombia's customs performance score (World Bank LPI, 2023) — rank 84 of 139</div>
+    </div>
+  </div>
+
+  <article>
+    <h2><span class="kicker">01 — Before you price it, you have to fit it</span>Packaging isn't a footnote — it sets the unit economics</h2>
+    <p>Every landed-cost model starts with a physical question: how much product actually fits in a shipment? The product here is a 250g folding bike helmet, non-perishable, non-hazardous except for one detail that changes its shipping classification — an embedded emergency-positioning chip powered by a lithium battery, which requires UN 3481 hazardous-goods labeling regardless of how light or safe the product otherwise is.</p>
+    <p>Working from the individual box (25 × 15 × 20 cm) and a standard EPAL Europallet (120 × 80 cm, 144 mm base height), the optimal load is 8 boxes along the length and 3 across the width — 24 boxes per layer — stacked 7 layers high before exceeding a manageable pallet height. That's a calculation, not an estimate, and it's the number that everything downstream (freight cost per unit, container fill rate, per-unit logistics cost) gets divided by.</p>
+
+    <div class="chart-block">
+      <h3>Pallet build-up</h3>
+      <div class="sub">24 boxes per layer × 7 layers = 168 units per EPAL pallet</div>
+      <div class="pallet3d-wrap">
+        <div class="pallet3d-scene">
+          <div class="pallet3d" id="pallet3d">
+            <div class="p3d-base"></div>
+            <div class="p3d-layer" data-layer="1" style="--z: 0px; transform: translateZ(0px); z-index:1;"></div>
+            <div class="p3d-layer" data-layer="2" style="--z: 20px; transform: translateZ(20px); z-index:2;"></div>
+            <div class="p3d-layer" data-layer="3" style="--z: 40px; transform: translateZ(40px); z-index:3;"></div>
+            <div class="p3d-layer" data-layer="4" style="--z: 60px; transform: translateZ(60px); z-index:4;"></div>
+            <div class="p3d-layer" data-layer="5" style="--z: 80px; transform: translateZ(80px); z-index:5;"></div>
+            <div class="p3d-layer" data-layer="6" style="--z: 100px; transform: translateZ(100px); z-index:6;"></div>
+            <div class="p3d-layer" data-layer="7" style="--z: 120px; transform: translateZ(120px); z-index:7;"></div>
+          </div>
+        </div>
+        <div class="pallet3d-readout">
+          <div class="val" id="p3dVal">Hover a layer</div>
+          <div class="lbl" id="p3dLbl">Each layer holds 24 boxes, arranged 8 long × 3 wide.</div>
+          <div class="total">168 units/pallet total · height ≈154.4 cm (7 × 20 cm + 14.4 cm base)</div>
+        </div>
+      </div>
+    </div>
+
+    <h2><span class="kicker">02 — Same product, two prices</span>Mapping where the extra €5.10 actually goes</h2>
+    <p>The domestic and export cost stacks share a starting point — €40 in production cost — and diverge from there. It's tempting to assume the gap is the import tariff. It isn't: in this build, the difference comes almost entirely from an extra logistics leg (inland transport, customs formalities, main freight) layered before the same 20%–20% margin structure and a comparable consumption tax.</p>
+
+    <div class="chart-block">
+      <h3>Landed-cost build-up: domestic (Spain) vs. export (Colombia)</h3>
+      <div class="sub">€ per unit, cumulative</div>
+      <div class="stackbar-group" id="stackbarGroup">
+        <div class="stackbar-row">
+          <div class="stackbar-label">Domestic<br><span>(Spain)</span></div>
+          <div class="stackbar-track">
+            <div class="stackbar-seg" data-cat="prod" style="width: 38.1%; background: #7D6835;" title="Production: €40.00"></div>
+            <div class="stackbar-seg" data-cat="logi" style="width: 11.0%; background: #5C82A8;" title="Logistics: €11.60"></div>
+            <div class="stackbar-seg" data-cat="mmar" style="width: 9.8%; background: #C9A24B;" title="Manufacturer margin: €10.32"></div>
+            <div class="stackbar-seg" data-cat="rmar" style="width: 11.8%; background: #6B7280;" title="Retailer margin: €12.40"></div>
+            <div class="stackbar-seg" data-cat="tax" style="width: 14.9%; background: #3E4448;" title="Tax: €15.60"></div>
+          </div>
+          <div class="stackbar-total">€89.90</div>
+        </div>
+        <div class="stackbar-row">
+          <div class="stackbar-label">Export<br><span>(Colombia)</span></div>
+          <div class="stackbar-track">
+            <div class="stackbar-seg" data-cat="prod" style="width: 38.1%; background: #7D6835;" title="Production: €40.00"></div>
+            <div class="stackbar-seg" data-cat="logi" style="width: 14.7%; background: #5C82A8;" title="Logistics: €15.44"></div>
+            <div class="stackbar-seg" data-cat="mmar" style="width: 10.6%; background: #C9A24B;" title="Manufacturer margin: €11.09"></div>
+            <div class="stackbar-seg" data-cat="rmar" style="width: 12.7%; background: #6B7280;" title="Retailer margin: €13.31"></div>
+            <div class="stackbar-seg" data-cat="tax" style="width: 14.4%; background: #3E4448;" title="Tax: €15.17"></div>
+            <div class="stackbar-seg stackbar-duty" id="dutySeg" data-cat="duty" style="width: 0%; background: #B4573F;" title="Import duty (simulated): €0.00"></div>
+          </div>
+          <div class="stackbar-total" id="stackbarTotal">€95.00</div>
+        </div>
+        <div class="stackbar-scale"><span>€0</span><span>€25</span><span>€50</span><span>€75</span><span>€100</span></div>
+      </div>
+      <div class="stackbar-legend">
+        <span><i style="background:#7D6835;"></i>Production</span>
+        <span><i style="background:#5C82A8;"></i>Logistics</span>
+        <span><i style="background:#C9A24B;"></i>Manufacturer margin</span>
+        <span><i style="background:#6B7280;"></i>Retailer margin</span>
+        <span><i style="background:#3E4448;"></i>Tax</span>
+        <span><i style="background:#B4573F;"></i>Import duty (simulated)</span>
+      </div>
+      <div class="credit">Author's reconstruction from the original cost breakdown tables (Tabla 12 and Tabla 13 of the source report). Category groupings are the author's own for comparability. Bar widths scaled to €105.</div>
+    </div>
+
+    <div class="cost-table-wrap">
+      <table class="cost-table">
+        <thead><tr><th>Component</th><th class="num">Domestic (Spain)</th><th class="num">Export (Colombia)</th></tr></thead>
+        <tbody>
+          <tr><td>Production cost</td><td class="num">€40.00</td><td class="num">€40.00</td></tr>
+          <tr><td>Logistics (domestic transport / inland + customs + main freight)</td><td class="num">€11.60</td><td class="num">€15.44</td></tr>
+          <tr><td>Manufacturer margin (20%)</td><td class="num">€10.32</td><td class="num">€11.09</td></tr>
+          <tr><td>Retailer margin (20%)</td><td class="num">€12.40</td><td class="num">€13.31</td></tr>
+          <tr><td>Tax (VAT 21% / consumption tax 19%)</td><td class="num">€15.60</td><td class="num">€15.17</td></tr>
+          <tr class="total"><td>Final retail price</td><td class="num">€89.90</td><td class="num">€95.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flag-box">
+      <strong>A gap worth flagging.</strong> The published Colombian tariff schedule sets a 10% MFN duty on imported helmets, but the cost table above has no separate tariff line — only customs formalities (€2.50). That's either an intentional assumption (Spain–Colombia trade may qualify for preferential treatment under the EU–Andean trade agreement) or a gap in the original model. In a real cost-to-serve build, that line needs to be explicitly verified and priced.
+    </div>
+
+    <div class="tariff-sim">
+      <div class="sim-head">Model it yourself: what if that duty line does apply?</div>
+      <div class="sim-row">
+        <input type="range" id="tariffSlider" min="0" max="15" step="1" value="0" aria-label="Simulated import duty percentage">
+        <div class="pct-display" id="tariffPctLabel">0%</div>
+      </div>
+      <div class="tariff-readout">
+        <div><div class="val" id="dutyAmount">€0.00</div><div class="lbl">simulated duty on €40 goods value</div></div>
+        <div><div class="val" id="newTotal">€95.00</div><div class="lbl">recalculated landed price</div></div>
+        <div><div class="val" id="pctChange">+0.0%</div><div class="lbl">vs. the model's current €95.00</div></div>
+      </div>
+    </div>
+
+    <h2><span class="kicker">03 — The friction a tariff line doesn't capture</span>Customs isn't binary — it's a performance score</h2>
+    <p>Duties are a known, published number. Customs efficiency isn't — and it moves the real cost of clearing goods just as much. The World Bank's Logistics Performance Index scores Colombia's customs process at 2.21 out of 5 for 2023, ranking 84th of 139 countries assessed — and the original research traced a declining trend since a 2018 peak, ending 2023 close to the 2016 low. A low, unstable customs score means less predictable clearance times, which is a cost even when it never shows up as a line item: it shows up as safety stock, missed delivery windows, and inventory tied up in transit.</p>
+
+    <div class="gauge-block">
+      <div>
+        <div class="gauge-num">2.21<span style="font-size:1rem;color:var(--ink-soft);"> / 5.00</span></div>
+        <div class="gauge-sub">Colombia — Customs sub-score, LPI 2023 · rank 84/139</div>
+      </div>
+      <div class="gauge-track"><div class="gauge-fill" style="width: 44.2%;"></div></div>
+    </div>
+    <div class="credit">Source: World Bank Logistics Performance Index 2023, as compiled in the original research (Analdex).</div>
+
+    <h2><span class="kicker">04 — Risk lives in the incoterm, too</span>Who owns the risk after the pallet leaves the dock</h2>
+    <p>The model uses a DAP (Delivered at Place) incoterm rather than the more common DDP: the seller covers cost and risk up to an agreed point in Colombia, but the buyer — a local subsidiary, in this case — handles import clearance from there. That single choice moves customs risk, not just customs cost, off the exporter's books. Tap each stage below to see who's actually holding cost and risk at that point.</p>
+
+    <div class="risk-legend">
+      <span><span class="dot seller"></span>Seller (Closca Design) bears cost &amp; risk</span>
+      <span><span class="dot buyer"></span>Buyer (Closca Design Colombia) bears cost &amp; risk</span>
+    </div>
+
+    <div class="risk-timeline">
+      <details class="risk-node seller">
+        <summary>1. Production &amp; export packing<br><span style="color:var(--ink-soft); font-weight:400;">Valencia</span></summary>
+        <div class="detail">Manufacturing, primary packaging, palletization and export documentation. Fully on the seller's books.</div>
+        <div class="detail"><span class="who">Seller</span></div>
+      </details>
+      <details class="risk-node seller">
+        <summary>2. Inland transport &amp; main freight<br><span style="color:var(--ink-soft); font-weight:400;">Port to transit</span></summary>
+        <div class="detail">Domestic haulage, export customs formalities, and international freight to the agreed place in Colombia.</div>
+        <div class="detail"><span class="who">Seller</span></div>
+      </details>
+      <details class="risk-node seller" open>
+        <summary>3. Arrival at agreed place<br><span style="color:var(--gold); font-weight:500;">DAP handoff point</span></summary>
+        <div class="detail">The seller's responsibility ends here — goods arrive, not yet unloaded, not yet import-cleared. This is the line in the sand a DAP contract draws.</div>
+        <div class="detail"><span class="who">Handoff</span></div>
+      </details>
+      <details class="risk-node buyer">
+        <summary>4. Import clearance &amp; duties<br><span style="color:var(--ink-soft); font-weight:400;">Colombian customs</span></summary>
+        <div class="detail">Import formalities, any applicable duties, and the customs-efficiency risk quantified by the LPI score above — all on the buyer from this point.</div>
+        <div class="detail"><span class="who">Buyer</span></div>
+      </details>
+      <details class="risk-node buyer">
+        <summary>5. Final delivery<br><span style="color:var(--ink-soft); font-weight:400;">To retail point</span></summary>
+        <div class="detail">Unloading and last-mile delivery to the point of sale in Bogotá.</div>
+        <div class="detail"><span class="who">Buyer</span></div>
+      </details>
+    </div>
+
+    <div class="takeaway-box">
+      <h3>What this translates to for cost-to-serve and customs risk modeling</h3>
+      <ul>
+        <li><strong>Palletization math is a cost input, not an afterthought.</strong> Units-per-pallet drives freight cost per unit directly — get the cubing wrong and every downstream margin calculation is wrong too.</li>
+        <li><strong>Landed cost needs a line for every leg, verified against the actual tariff schedule.</strong> A missing or assumed duty line is exactly the kind of gap that turns a clean model into a pricing surprise post-launch.</li>
+        <li><strong>Customs performance is a forecastable risk, not a fixed fact.</strong> An LPI-style score with a visible trend is a leading indicator for where safety stock and lead-time buffers actually need to go.</li>
+      </ul>
+    </div>
+  </article>
+
+  <div class="note">Adapted from a team market-internationalization report for a Valencian company entering the Colombian market (Marketing Internacional, Universitat de València). The export logistics and pricing analysis — packaging, palletization, customs, and landed-cost modeling — was led by Andrea Hidalgo Arce and a teammate; two teammates contributed additional sections of the broader report. Figures are drawn directly from the original cost tables and cited sources (Euro Palé EPAL, Colombia's Arancel de Aduanas, World Bank LPI via Analdex); category groupings and the risk flag on the tariff line are the author's own analysis.</div>
+
+  
+</div>
+    <nav class="pager" aria-label="Other cases">
+      <a href="three-markets.html">← Three Markets, One Decision: Why the Scorecard Didn't Win</a>
+      <a href="../index.html#cases">Back to all cases</a>
+      <a href="mapping-chokepoints.html">Mapping Chokepoints: A Supply Chain Risk Case Study →</a>
+    </nav>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Andrea Hidalgo · Valencia</p>
+      <p><a href="../index.html">Home</a></p>
+    </div>
+  </footer>
+<script>
+(function () {
+  var BASE_TOTAL = 95.00;
+  var GOODS_VALUE = 40.00;
+  var SCALE_MAX = 105.00;
+
+  function initPallet3D() {
+    var layers = document.querySelectorAll('.p3d-layer');
+    var valEl = document.getElementById('p3dVal');
+    var lblEl = document.getElementById('p3dLbl');
+    if (!layers.length || !valEl) return;
+
+    var runningTotal = { 1:24, 2:48, 3:72, 4:96, 5:120, 6:144, 7:168 };
+
+    layers.forEach(function (layer) {
+      layer.addEventListener('mouseenter', function () {
+        var n = layer.getAttribute('data-layer');
+        valEl.textContent = '24 boxes';
+        lblEl.textContent = 'Layer ' + n + ' of 7 — ' + runningTotal[n] + ' units stacked so far';
+      });
+      layer.addEventListener('mouseleave', function () {
+        valEl.textContent = 'Hover a layer';
+        lblEl.textContent = 'Each layer holds 24 boxes, arranged 8 long × 3 wide.';
+      });
+      layer.addEventListener('touchstart', function () {
+        layer.dispatchEvent(new Event('mouseenter'));
+      }, { passive: true });
+    });
+  }
+
+  function initTariffSim() {
+    var slider = document.getElementById('tariffSlider');
+    if (!slider) return;
+    var pctLabel = document.getElementById('tariffPctLabel');
+    var dutyEl = document.getElementById('dutyAmount');
+    var totalEl = document.getElementById('newTotal');
+    var changeEl = document.getElementById('pctChange');
+    var dutySeg = document.getElementById('dutySeg');
+    var stackbarTotal = document.getElementById('stackbarTotal');
+
+    function update() {
+      var pct = parseInt(slider.value, 10);
+      var duty = GOODS_VALUE * (pct / 100);
+      var newTotal = BASE_TOTAL + duty;
+      var pctChange = (duty / BASE_TOTAL) * 100;
+
+      pctLabel.textContent = pct + '%';
+      dutyEl.textContent = '€' + duty.toFixed(2);
+      totalEl.textContent = '€' + newTotal.toFixed(2);
+      changeEl.textContent = (pctChange >= 0 ? '+' : '') + pctChange.toFixed(1) + '%';
+      changeEl.classList.toggle('up', duty > 0);
+      totalEl.classList.toggle('up', duty > 0);
+
+      if (dutySeg) {
+        var widthPct = (duty / SCALE_MAX) * 100;
+        dutySeg.style.width = widthPct + '%';
+        dutySeg.title = 'Import duty (simulated): €' + duty.toFixed(2);
+      }
+      if (stackbarTotal) {
+        stackbarTotal.textContent = '€' + newTotal.toFixed(2);
+        stackbarTotal.classList.toggle('up', duty > 0);
+      }
+    }
+
+    slider.addEventListener('input', update);
+    update();
+  }
+
+  initTariffSim();
+  initPallet3D();
+})();
+</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
