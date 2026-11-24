@@ -10,7 +10,7 @@
     if (!toggle) return;
     var dark = theme === "dark";
     toggle.setAttribute("aria-pressed", dark ? "true" : "false");
-    toggle.setAttribute("aria-label", dark ? "Activar tema claro" : "Activar tema oscuro");
+    toggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
   }
 
   function applyTheme(theme) {
@@ -27,7 +27,7 @@
       try {
         localStorage.setItem("theme", next);
       } catch (err) {
-        /* si el almacenamiento está bloqueado, el tema igual cambia en esta visita */
+        /* If storage is blocked, the theme still changes for this visit. */
       }
       applyTheme(next);
     });
@@ -91,16 +91,16 @@
   if (!canvas || !window.Chart) return;
 
   var labels = [
-    "2022 T1",
-    "2022 T2",
-    "2022 T3",
-    "2022 T4",
-    "2023 T1",
-    "2023 T2",
-    "2023 T3",
-    "2023 T4",
-    "2024 T1",
-    "2024 T2"
+    "2022 Q1",
+    "2022 Q2",
+    "2022 Q3",
+    "2022 Q4",
+    "2023 Q1",
+    "2023 Q2",
+    "2023 Q3",
+    "2023 Q4",
+    "2024 Q1",
+    "2024 Q2"
   ];
   var values = [42, 48, 45, 61, 58, 72, 69, 80, 77, 91];
   var chart = null;
@@ -117,7 +117,7 @@
         labels: labels,
         datasets: [
           {
-            label: "Índice ilustrativo",
+            label: "Illustrative index",
             data: values,
             borderColor: cssVar("--lagoon"),
             backgroundColor: cssVar("--mist"),
@@ -142,7 +142,7 @@
           tooltip: {
             callbacks: {
               label: function (context) {
-                return "Índice ilustrativo: " + context.parsed.y + " (dato de ejemplo)";
+                return "Illustrative index: " + context.parsed.y + " (example data)";
               }
             }
           }
@@ -157,7 +157,7 @@
             suggestedMax: 100,
             title: {
               display: true,
-              text: "Índice ilustrativo (sin unidad real)",
+              text: "Illustrative index (no real unit)",
               color: cssVar("--ink-soft")
             },
             ticks: { color: cssVar("--ink-soft") },

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Formulario de jefes de turno · Andrea Hidalgo</title>
-  <meta name="description" content="Formulario de parte de turno en Streamlit, con SQLite y una regla de duplicado por fecha, jefe y turno.">
+  <title>Shift-lead form · Andrea Hidalgo</title>
+  <meta name="description" content="Business intelligence on a logistics operation: a Streamlit shift-report form stored in SQLite, with a duplicate rule on date, shift lead, and shift.">
   <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,31 +25,31 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="../index.html">
         <span class="brand-mark" aria-hidden="true">DV</span>
         <span>Andrea Hidalgo</span>
       </a>
-      <nav class="nav" aria-label="Principal">
-        <a href="../index.html#ruta">Ruta</a>
-        <a href="../index.html#casos">Casos</a>
-        <a href="../index.html#contacto">Contacto</a>
-        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#path">Path</a>
+        <a href="../index.html#cases">Cases</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
       </nav>
-      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Activar tema oscuro">
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke-linecap="round"></path></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z" stroke-linejoin="round"></path></svg>
       </button>
     </div>
   </header>
-  <main id="contenido" class="page">
+  <main id="content" class="page">
     <article class="wrap">
       <header class="case-hero">
-        <p class="kicker"><a href="../index.html#dashboards">Dashboards y BI</a></p>
-        <h1>Formulario de jefes de turno</h1>
-        <p class="lede">Un parte de turno en Streamlit que se guarda en SQLite. La arquitectura son tres módulos: <code>app.py</code>, <code>validar.py</code> y <code>storage.py</code>.</p>
+        <p class="kicker"><a href="../index.html#dashboards">Dashboards and BI</a></p>
+        <h1>Shift-lead form</h1>
+        <p class="lede">A shift report in Streamlit, saved to SQLite. The architecture is three modules: <code>app.py</code>, <code>validar.py</code>, and <code>storage.py</code>.</p>
         <ul class="chips">
           <li>Python</li>
           <li>Streamlit</li>
@@ -57,111 +57,111 @@
         </ul>
       </header>
       <div class="case-body">
-        <h2>Contexto</h2>
-        <p>En el almacén, cada jefe de turno deja un parte. El formulario pone esa nota en campos, en vez de un mensaje suelto. No uso nombres de personas: en los ejemplos el jefe se llama «Jefe ejemplo».</p>
-        <p><span class="pending">[Pendiente: campos definitivos del parte y quién lo pidió]</span></p>
+        <h2>Context</h2>
+        <p>On the logistics operation, each shift lead files a report. The form puts that note into fields instead of a loose message. I don’t use real names: in the examples the lead is “Example lead”.</p>
+        <p><span class="pending">[To do: final fields on the report and who asked for it]</span></p>
 
-        <h2>Problema</h2>
-        <p>Un parte repetido ensucia el histórico. La regla de duplicado es concreta: misma fecha, mismo jefe de turno y mismo turno.</p>
-        <p><span class="pending">[Pendiente: qué fallaba en el proceso anterior]</span></p>
+        <h2>Problem</h2>
+        <p>A repeated report dirties the history. The duplicate rule is specific: same date, same shift lead, and same shift.</p>
+        <p><span class="pending">[To do: what failed in the previous process]</span></p>
 
-        <h2>Qué hice</h2>
-        <p>Organicé la app en tres piezas. La interfaz no decide sola si el parte es nuevo: le pregunta a la validación y, si pasa, se lo entrega al almacenamiento.</p>
+        <h2>What I did</h2>
+        <p>I split the app into three pieces. The screen does not decide on its own whether a report is new: it asks the validation module and, if it passes, hands it to storage.</p>
         <ol class="arch">
           <li>
             <strong>app.py</strong>
-            <span>La pantalla del formulario en Streamlit: fecha, jefe de turno, turno y nota.</span>
+            <span>The Streamlit form: date, shift lead, shift, and note.</span>
           </li>
           <li>
             <strong>validar.py</strong>
-            <span>Las reglas. Hay duplicado si coinciden fecha, jefe y turno.</span>
+            <span>The rules. A row is a duplicate when date, lead, and shift all match.</span>
           </li>
           <li>
             <strong>storage.py</strong>
-            <span>Lee y escribe el parte en SQLite.</span>
+            <span>Reads and writes the report in SQLite.</span>
           </li>
         </ol>
-        <p class="example-banner" role="note">Datos de ejemplo. La maqueta no envía nada y los fragmentos no son el código fuente real: ilustran la arquitectura.</p>
-        <div class="mock" aria-label="Maqueta estática del formulario">
-          <label>Fecha
+        <p class="example-banner" role="note">Example data. The mock does not submit anything, and the snippets are not the real source: they illustrate the architecture.</p>
+        <div class="mock" aria-label="Static mock of the form">
+          <label>Date
             <input value="2024-03-12" readonly>
           </label>
-          <label>Jefe de turno
-            <input value="Jefe ejemplo" readonly>
+          <label>Shift lead
+            <input value="Example lead" readonly>
           </label>
-          <label>Turno
-            <input value="Mañana" readonly>
+          <label>Shift
+            <input value="Morning" readonly>
           </label>
-          <label>Nota
-            <textarea readonly>Relevo sin incidencias. Texto ficticio.</textarea>
+          <label>Note
+            <textarea readonly>Handover with no incidents. Fictional text.</textarea>
           </label>
-          <button class="btn btn-primary" type="button" disabled>Guardar</button>
+          <button class="btn btn-primary" type="button" disabled>Save</button>
         </div>
 
         <div class="code">
-          <div class="code-bar"><span>app.py</span><span>Datos de ejemplo</span></div>
+          <div class="code-bar"><span>app.py</span><span>Example data</span></div>
           <pre><code>import streamlit as st
-from validar import es_duplicado
-from storage import guardar, leer
+from validar import is_duplicate
+from storage import save, load
 
-st.title("Parte de turno")
+st.title("Shift report")
 
-parte = {
-    "fecha": str(st.date_input("Fecha")),
-    "jefe": st.text_input("Jefe de turno"),
-    "turno": st.selectbox("Turno", ["Mañana", "Tarde", "Noche"]),
-    "nota": st.text_area("Nota"),
+report = {
+    "date": str(st.date_input("Date")),
+    "lead": st.text_input("Shift lead"),
+    "shift": st.selectbox("Shift", ["Morning", "Afternoon", "Night"]),
+    "note": st.text_area("Note"),
 }
 
-if st.button("Guardar"):
-    if es_duplicado(parte, leer()):
-        st.error("Ya existe un parte con esa fecha, ese jefe y ese turno.")
+if st.button("Save"):
+    if is_duplicate(report, load()):
+        st.error("A report already exists for that date, lead, and shift.")
     else:
-        guardar(parte)
-        st.success("Parte guardado.")</code></pre>
+        save(report)
+        st.success("Report saved.")</code></pre>
         </div>
 
         <div class="code">
-          <div class="code-bar"><span>validar.py</span><span>Datos de ejemplo</span></div>
-          <pre><code>CLAVE = ("fecha", "jefe", "turno")
+          <div class="code-bar"><span>validar.py</span><span>Example data</span></div>
+          <pre><code>KEY = ("date", "lead", "shift")
 
-def es_duplicado(parte, existentes):
-    clave = tuple(parte[campo] for campo in CLAVE)
-    for previo in existentes:
-        if tuple(previo[campo] for campo in CLAVE) == clave:
+def is_duplicate(report, existing):
+    key = tuple(report[field] for field in KEY)
+    for previous in existing:
+        if tuple(previous[field] for field in KEY) == key:
             return True
     return False</code></pre>
         </div>
 
         <div class="code">
-          <div class="code-bar"><span>storage.py</span><span>Datos de ejemplo</span></div>
+          <div class="code-bar"><span>storage.py</span><span>Example data</span></div>
           <pre><code>import sqlite3
 
-def guardar(parte):
-    with sqlite3.connect("partes.db") as con:
+def save(report):
+    with sqlite3.connect("reports.db") as con:
         con.execute(
             """
-            INSERT INTO partes (fecha, jefe, turno, nota)
-            VALUES (:fecha, :jefe, :turno, :nota)
+            INSERT INTO reports (date, lead, shift, note)
+            VALUES (:date, :lead, :shift, :note)
             """,
-            parte,
+            report,
         )</code></pre>
         </div>
-        <p>Si entra otro parte con fecha 2024-03-12, jefe «Jefe ejemplo» y turno Mañana, <code>es_duplicado</code> devuelve verdadero y no se guarda. Cambia la fecha, el jefe o el turno, y ya no es el mismo parte.</p>
+        <p>If another report comes in for 2024-03-12, lead “Example lead”, and the Morning shift, <code>is_duplicate</code> returns true and it is not saved. Change the date, the lead, or the shift, and it is no longer the same report.</p>
 
-        <h2>Herramientas</h2>
+        <h2>Tools</h2>
         <ul class="chips">
           <li>Python</li>
           <li>Streamlit</li>
           <li>SQLite</li>
         </ul>
 
-        <h2>Resultado</h2>
-        <p><span class="pending">[Pendiente: si el formulario ya está en uso y qué cambió en el histórico]</span></p>
+        <h2>Result</h2>
+        <p><span class="pending">[To do: whether the form is in use and what changed in the history]</span></p>
 
-        <nav class="pager" aria-label="Otros casos">
-          <a href="productividad-almacen.html">← Productividad por turno</a>
-          <a href="semiconductores-corea.html">Semiconductores →</a>
+        <nav class="pager" aria-label="Other cases">
+          <a href="productividad-almacen.html">← Shift productivity</a>
+          <a href="semiconductores-corea.html">Semiconductors →</a>
         </nav>
       </div>
     </article>
@@ -169,7 +169,7 @@ def guardar(parte):
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <p>Andrea Hidalgo · Valencia</p>
-      <p><a href="../index.html">Portada</a></p>
+      <p><a href="../index.html">Home</a></p>
     </div>
   </footer>
   <script src="../js/main.js"></script>

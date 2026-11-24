@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="img/stamp.svg" width="120" alt="Sello CR · ES, Valencia">
+  <img src="img/stamp.svg" width="120" alt="Stamp, Costa Rica to Spain, Valencia">
 </p>
 
 <h1 align="center">DATAVIVA</h1>
 
 <p align="center">
-  <strong>Datos, comercio exterior y operaciones.</strong><br>
-  Portafolio de Andrea Hidalgo, costarricense en Valencia.
+  <strong>Data, foreign trade, and business intelligence.</strong><br>
+  Andrea Hidalgo, Business Intelligence Consultant. Costa Rican, based in Valencia, currently embedded in a logistics operation.
 </p>
 
 <p align="center">
@@ -26,21 +26,21 @@
   <img alt="Chart.js" src="https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white">
 </p>
 
-Sitio estático (HTML, CSS y JavaScript, sin build) para GitHub Pages como sitio de proyecto. Las cifras que ves en las páginas, cuando las hay, están marcadas como **datos de ejemplo**. Lo que falta lleva la marca `[Pendiente: …]`.
+Static site (HTML, CSS, and JavaScript, no build step) for GitHub Pages as a project site. Any figure on the pages is marked **example data**. Anything still missing is marked `[To do: …]`.
 
-## Cómo activar GitHub Pages
+## How to turn on GitHub Pages
 
-1. Abre el repositorio y entra en **Settings**.
-2. En el menú lateral, entra en **Pages**.
-3. En **Build and deployment**, elige **Deploy from a branch**.
+1. Open the repository and go to **Settings**.
+2. In the side menu, open **Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
 4. Branch: **main**. Folder: **/ (root)**.
-5. Guarda. En unos minutos el sitio queda en [https://hidalgoscode27.github.io/dataviva/](https://hidalgoscode27.github.io/dataviva/).
+5. Save. Within a few minutes the site is at [https://hidalgoscode27.github.io/dataviva/](https://hidalgoscode27.github.io/dataviva/).
 
-El archivo `.nojekyll` ya está en la raíz para que Pages publique las carpetas sin pasarlas por Jekyll.
+`.nojekyll` is already in the root so Pages publishes the folders without running them through Jekyll.
 
-## Mapa
+## Map
 
-- `index.html` — portada
-- `casos/` — los casos, el índice y `plantilla.html` para copiar uno nuevo
-- `cv/` — deja aquí el PDF y apunta el botón «Descargar CV» a ese archivo
+- `index.html` — home
+- `casos/` — the cases, the index, and `plantilla.html` to copy for a new case
+- `cv/` — put the PDF here and point the “Download CV” button at that file
 - `css/`, `js/`, `img/`

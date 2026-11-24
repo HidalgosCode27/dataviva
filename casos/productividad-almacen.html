@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Productividad por turno · Andrea Hidalgo</title>
-  <meta name="description" content="Tablero de productividad por turno en Excel y Power Query, para un sistema de bonos y para detectar anomalías.">
+  <title>Shift productivity · Andrea Hidalgo</title>
+  <meta name="description" content="Business intelligence on a logistics operation: a per-shift productivity dashboard in Excel and Power Query, for a bonus system and for anomalies.">
   <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,102 +25,102 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="../index.html">
         <span class="brand-mark" aria-hidden="true">DV</span>
         <span>Andrea Hidalgo</span>
       </a>
-      <nav class="nav" aria-label="Principal">
-        <a href="../index.html#ruta">Ruta</a>
-        <a href="../index.html#casos">Casos</a>
-        <a href="../index.html#contacto">Contacto</a>
-        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#path">Path</a>
+        <a href="../index.html#cases">Cases</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
       </nav>
-      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Activar tema oscuro">
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke-linecap="round"></path></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z" stroke-linejoin="round"></path></svg>
       </button>
     </div>
   </header>
-  <main id="contenido" class="page">
+  <main id="content" class="page">
     <article class="wrap">
       <header class="case-hero">
-        <p class="kicker"><a href="../index.html#dashboards">Dashboards y BI</a></p>
-        <h1>Productividad por turno</h1>
-        <p class="lede">Un tablero en Excel, alimentado con Power Query, para leer la productividad de cada turno con la misma regla. Sirve para sostener un sistema de bonos y para marcar anomalías.</p>
+        <p class="kicker"><a href="../index.html#dashboards">Dashboards and BI</a></p>
+        <h1>Shift productivity</h1>
+        <p class="lede">An Excel dashboard, fed by Power Query, so every shift is read with the same rule. It supports a bonus system and flags anomalies.</p>
         <ul class="chips">
           <li>Excel</li>
           <li>Power Query</li>
         </ul>
       </header>
       <div class="case-body">
-        <h2>Contexto</h2>
-        <p>El caso vive en un almacén en Sagunto, dentro del trabajo de analista de procesos logísticos. No nombro al operador ni al cliente. El tablero mira la productividad por turno, no a personas concretas.</p>
-        <p><span class="pending">[Pendiente: quién pidió el tablero y con qué periodicidad se actualiza]</span></p>
+        <h2>Context</h2>
+        <p>I’m supporting this as a business intelligence consultant, embedded in a logistics operation. I don’t name the operator or the client. The dashboard looks at productivity by shift, not at named people.</p>
+        <p><span class="pending">[To do: who asked for the dashboard and how often it refreshes]</span></p>
 
-        <h2>Problema</h2>
-        <p>Sin una lectura única por turno, un sistema de bonos no se puede aplicar con la misma regla y una anomalía se queda escondida en hojas sueltas.</p>
-        <p><span class="pending">[Pendiente: cómo se medía la productividad antes]</span></p>
+        <h2>Problem</h2>
+        <p>Without one reading per shift, a bonus system can’t apply the same rule, and an anomaly stays buried in loose sheets.</p>
+        <p><span class="pending">[To do: how productivity was measured before]</span></p>
 
-        <h2>Qué hice</h2>
-        <p>Preparé un tablero de KPIs de productividad por turno. Power Query ordena la entrada y Excel muestra el resultado, con una marca visual para la anomalía y una lectura que el bono puede usar.</p>
-        <p>No dejo aquí la lista real de indicadores ni la fórmula del bono. <span class="pending">[Pendiente: KPIs, umbral del bono y regla de anomalía]</span></p>
+        <h2>What I did</h2>
+        <p>I built a per-shift productivity KPI dashboard. Power Query shapes the input and Excel shows the result, with a visual mark for an anomaly and a reading the bonus can use.</p>
+        <p>The real indicator list and the bonus formula are not on this page. <span class="pending">[To do: KPIs, bonus threshold, and anomaly rule]</span></p>
 
-        <h2>Herramientas</h2>
+        <h2>Tools</h2>
         <ul class="chips">
           <li>Excel</li>
           <li>Power Query</li>
         </ul>
-        <p><span class="pending">[Pendiente: si este tablero también vive en Power BI]</span></p>
+        <p><span class="pending">[To do: whether this dashboard also lives in Power BI]</span></p>
 
-        <h2>Resultado</h2>
-        <p><span class="pending">[Pendiente: efecto sobre el bono, anomalías detectadas y si el tablero se adoptó]</span></p>
-        <p>La tabla de abajo no es el almacén. Solo enseña la forma del tablero.</p>
-        <p class="example-banner" role="note">Datos de ejemplo. Unidades inventadas. La fila marcada solo muestra cómo se vería una anomalía: no es un hallazgo real.</p>
+        <h2>Result</h2>
+        <p><span class="pending">[To do: effect on the bonus, anomalies found, and whether the dashboard was adopted]</span></p>
+        <p>The table below is not the operation. It only shows the shape of the dashboard.</p>
+        <p class="example-banner" role="note">Example data. Invented units. The highlighted row only shows how an anomaly would look: it is not a real finding.</p>
         <div class="table-wrap">
           <table>
-            <caption>Maqueta del tablero. Datos de ejemplo, sin relación con un turno real.</caption>
+            <caption>A mock of the dashboard. Example data, unrelated to a real shift.</caption>
             <thead>
               <tr>
-                <th scope="col">Turno</th>
-                <th scope="col">Cuadrilla</th>
-                <th scope="col">Unidades</th>
-                <th scope="col">Horas</th>
-                <th scope="col">Unidades / hora</th>
+                <th scope="col">Shift</th>
+                <th scope="col">Crew</th>
+                <th scope="col">Units</th>
+                <th scope="col">Hours</th>
+                <th scope="col">Units / hour</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Mañana</td>
-                <td>Ejemplo A</td>
+                <td>Morning</td>
+                <td>Example A</td>
                 <td>940</td>
                 <td>8</td>
-                <td>117,5</td>
+                <td>117.5</td>
               </tr>
               <tr>
-                <td>Tarde</td>
-                <td>Ejemplo B</td>
+                <td>Afternoon</td>
+                <td>Example B</td>
                 <td>880</td>
                 <td>8</td>
-                <td>110,0</td>
+                <td>110.0</td>
               </tr>
               <tr class="is-flag">
-                <td>Noche</td>
-                <td>Ejemplo C</td>
+                <td>Night</td>
+                <td>Example C</td>
                 <td>410</td>
                 <td>8</td>
-                <td>51,3</td>
+                <td>51.3</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p>Un bono podría anclarse a un umbral de unidades por hora. El umbral de verdad está en el pendiente de arriba, no en esta maqueta.</p>
+        <p>A bonus could be tied to a units-per-hour threshold. The real threshold is in the placeholder above, not in this mock.</p>
 
-        <nav class="pager" aria-label="Otros casos">
-          <a href="../index.html#casos">← Casos</a>
-          <a href="formulario-jefes-turno.html">Formulario de jefes de turno →</a>
+        <nav class="pager" aria-label="Other cases">
+          <a href="../index.html#cases">← Cases</a>
+          <a href="formulario-jefes-turno.html">Shift-lead form →</a>
         </nav>
       </div>
     </article>
@@ -128,7 +128,7 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <p>Andrea Hidalgo · Valencia</p>
-      <p><a href="../index.html">Portada</a></p>
+      <p><a href="../index.html">Home</a></p>
     </div>
   </footer>
   <script src="../js/main.js"></script>

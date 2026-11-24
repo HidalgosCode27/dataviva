@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Conciliación de stock · Andrea Hidalgo</title>
-  <meta name="description" content="Conciliación de stock entre el sistema del cliente y el WMS, con un FULL OUTER JOIN en SQL y el equivalente en pandas. Fragmentos con datos falsos.">
+  <title>Stock reconciliation · Andrea Hidalgo</title>
+  <meta name="description" content="Business intelligence on a logistics operation: reconciling stock between the client’s system and the WMS with a SQL FULL OUTER JOIN and pandas. Snippets use fake data.">
   <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,31 +25,31 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <a class="skip" href="#content">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="../index.html">
         <span class="brand-mark" aria-hidden="true">DV</span>
         <span>Andrea Hidalgo</span>
       </a>
-      <nav class="nav" aria-label="Principal">
-        <a href="../index.html#ruta">Ruta</a>
-        <a href="../index.html#casos">Casos</a>
-        <a href="../index.html#contacto">Contacto</a>
-        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#path">Path</a>
+        <a href="../index.html#cases">Cases</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
       </nav>
-      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Activar tema oscuro">
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke-linecap="round"></path></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z" stroke-linejoin="round"></path></svg>
       </button>
     </div>
   </header>
-  <main id="contenido" class="page">
+  <main id="content" class="page">
     <article class="wrap">
       <header class="case-hero">
-        <p class="kicker"><a href="../index.html#etl">ETL y automatización</a></p>
-        <h1>Conciliación de stock</h1>
-        <p class="lede">Cruzar el stock que ve el cliente con el stock del WMS. Un <code>FULL OUTER JOIN</code> en SQL, y el mismo cruce en pandas, para no perder las filas que viven en un solo lado.</p>
+        <p class="kicker"><a href="../index.html#etl">ETL and automation</a></p>
+        <h1>Stock reconciliation</h1>
+        <p class="lede">Match the stock the client sees with the stock in the WMS. A SQL <code>FULL OUTER JOIN</code>, and the same match in pandas, so rows that live on only one side are not dropped.</p>
         <ul class="chips">
           <li>SQL</li>
           <li>PostgreSQL</li>
@@ -58,72 +58,72 @@
         </ul>
       </header>
       <div class="case-body">
-        <h2>Contexto</h2>
-        <p>En el almacén de Sagunto hay dos listas del mismo stock: la del sistema del cliente y la del WMS. El caso es conciliarlas. No nombro sistemas comerciales, clientes ni personas.</p>
-        <p><span class="pending">[Pendiente: cada cuánto se conciliaba y quién leía el resultado]</span></p>
+        <h2>Context</h2>
+        <p>On the logistics operation I’m supporting, two lists describe the same stock: the client’s system and the WMS. The case is reconciling them. I don’t name commercial systems, clients, or people.</p>
+        <p><span class="pending">[To do: how often it was reconciled and who read the result]</span></p>
 
-        <h2>Problema</h2>
-        <p>Un <code>INNER JOIN</code> deja fuera el SKU que está solo en un lado. Ese es justo el descuadre que la conciliación tiene que ver: unidades que no coinciden y referencias que faltan en uno de los dos sistemas.</p>
-        <p><span class="pending">[Pendiente: qué se hacía con las diferencias]</span></p>
+        <h2>Problem</h2>
+        <p>An <code>INNER JOIN</code> drops the SKU that exists on only one side. That is exactly the gap a reconciliation has to show: units that don’t match, and references missing from one of the two systems.</p>
+        <p><span class="pending">[To do: what was done with the differences]</span></p>
 
-        <h2>Qué hice</h2>
-        <p>Propuse el cruce con un <code>FULL OUTER JOIN</code> y el equivalente en pandas (<code>merge</code> con <code>how="outer"</code>). La diferencia de ejemplo es unidades del cliente menos unidades del WMS. Si un lado no tiene el SKU, cuenta como cero solo para esa resta.</p>
-        <p>La sintaxis de SQL es la de PostgreSQL. No afirmo con esto que la base del almacén sea PostgreSQL: <span class="pending">[Pendiente: motor real de la consulta]</span>.</p>
-        <p class="example-banner" role="note">Datos de ejemplo. SKU y unidades inventados. No son stock de un cliente ni de un WMS.</p>
+        <h2>What I did</h2>
+        <p>I proposed the match as a <code>FULL OUTER JOIN</code>, and the pandas equivalent (<code>merge</code> with <code>how="outer"</code>). In the example, the difference is client units minus WMS units. If one side has no SKU, it counts as zero only for that subtraction.</p>
+        <p>The SQL syntax is PostgreSQL’s. That does not mean the operation’s database is PostgreSQL: <span class="pending">[To do: the real database engine]</span>.</p>
+        <p class="example-banner" role="note">Example data. Invented SKUs and units. This is not stock from a client or a WMS.</p>
 
         <div class="code">
-          <div class="code-bar"><span>conciliacion.sql</span><span>Datos de ejemplo</span></div>
-          <pre><code>-- Datos de ejemplo. No es un esquema real.
-WITH cliente AS (
+          <div class="code-bar"><span>reconcile.sql</span><span>Example data</span></div>
+          <pre><code>-- Example data. This is not a real schema.
+WITH client AS (
   SELECT * FROM (VALUES
     ('SKU-101', 120),
     ('SKU-204', 40),
     ('SKU-318', 15)
-  ) AS t(sku, unidades)
+  ) AS t(sku, units)
 ),
 wms AS (
   SELECT * FROM (VALUES
     ('SKU-101', 118),
     ('SKU-204', 40),
     ('SKU-422', 7)
-  ) AS t(sku, unidades)
+  ) AS t(sku, units)
 )
 SELECT
   COALESCE(c.sku, w.sku) AS sku,
-  c.unidades AS unidades_cliente,
-  w.unidades AS unidades_wms,
-  COALESCE(c.unidades, 0) - COALESCE(w.unidades, 0) AS diferencia
-FROM cliente AS c
+  c.units AS client_units,
+  w.units AS wms_units,
+  COALESCE(c.units, 0) - COALESCE(w.units, 0) AS difference
+FROM client AS c
 FULL OUTER JOIN wms AS w ON c.sku = w.sku
 ORDER BY sku;</code></pre>
         </div>
 
         <div class="code">
-          <div class="code-bar"><span>conciliacion.py</span><span>Datos de ejemplo</span></div>
+          <div class="code-bar"><span>reconcile.py</span><span>Example data</span></div>
           <pre><code>import pandas as pd
 
-cliente = pd.DataFrame({
+client = pd.DataFrame({
     "sku": ["SKU-101", "SKU-204", "SKU-318"],
-    "unidades": [120, 40, 15],
+    "units": [120, 40, 15],
 })
 wms = pd.DataFrame({
     "sku": ["SKU-101", "SKU-204", "SKU-422"],
-    "unidades": [118, 40, 7],
+    "units": [118, 40, 7],
 })
 
-cruce = cliente.merge(wms, on="sku", how="outer", suffixes=("_cliente", "_wms"))
-cruce["diferencia"] = cruce["unidades_cliente"].fillna(0) - cruce["unidades_wms"].fillna(0)</code></pre>
+matched = client.merge(wms, on="sku", how="outer", suffixes=("_client", "_wms"))
+matched["difference"] = matched["units_client"].fillna(0) - matched["units_wms"].fillna(0)</code></pre>
         </div>
 
         <div class="table-wrap">
           <table>
-            <caption>Resultado ilustrativo de esa consulta, con los mismos datos falsos. Una diferencia positiva significa más unidades en el sistema del cliente; una negativa, más en el WMS.</caption>
+            <caption>An illustrative result of that query, using the same fake data. A positive difference means more units in the client’s system; a negative one means more in the WMS.</caption>
             <thead>
               <tr>
                 <th scope="col">SKU</th>
-                <th scope="col">Cliente</th>
+                <th scope="col">Client</th>
                 <th scope="col">WMS</th>
-                <th scope="col">Diferencia</th>
+                <th scope="col">Difference</th>
               </tr>
             </thead>
             <tbody>
@@ -154,23 +154,23 @@ cruce["diferencia"] = cruce["unidades_cliente"].fillna(0) - cruce["unidades_wms"
             </tbody>
           </table>
         </div>
-        <p>SKU-318 solo está en el cliente. SKU-422 solo está en el WMS. Un join interno los habría borrado de la lista.</p>
+        <p>SKU-318 is only on the client side. SKU-422 is only in the WMS. An inner join would have dropped both from the list.</p>
 
-        <h2>Herramientas</h2>
+        <h2>Tools</h2>
         <ul class="chips">
           <li>SQL · FULL OUTER JOIN</li>
-          <li>PostgreSQL · sintaxis del ejemplo</li>
+          <li>PostgreSQL · example syntax</li>
           <li>Python</li>
           <li>pandas</li>
         </ul>
 
-        <h2>Resultado</h2>
-        <p><span class="pending">[Pendiente: si el flujo ya corre fuera de la prueba]</span></p>
-        <p><span class="pending">[Pendiente: resultado medido]</span></p>
+        <h2>Result</h2>
+        <p><span class="pending">[To do: whether the flow runs outside the trial]</span></p>
+        <p><span class="pending">[To do: measured result]</span></p>
 
-        <nav class="pager" aria-label="Otros casos">
-          <a href="deuda-hogares.html">← Deuda de los hogares</a>
-          <a href="../index.html#casos">Casos →</a>
+        <nav class="pager" aria-label="Other cases">
+          <a href="deuda-hogares.html">← Household debt</a>
+          <a href="../index.html#cases">Cases →</a>
         </nav>
       </div>
     </article>
@@ -178,7 +178,7 @@ cruce["diferencia"] = cruce["unidades_cliente"].fillna(0) - cruce["unidades_wms"
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <p>Andrea Hidalgo · Valencia</p>
-      <p><a href="../index.html">Portada</a></p>
+      <p><a href="../index.html">Home</a></p>
     </div>
   </footer>
   <script src="../js/main.js"></script>
