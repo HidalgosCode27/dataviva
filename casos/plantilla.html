@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plantilla de caso · Andrea Hidalgo</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Plantilla reutilizable para un caso del portafolio DATAVIVA.">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,520&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored === "light" || stored === "dark"
+          ? stored
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (err) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+</head>
+<!--
+  PLANTILLA DE CASO
+  1. Duplica este archivo dentro de casos/ con un nombre en minúsculas y guiones.
+  2. Cambia el title, el h1 y las cinco secciones.
+  3. No inventes cifras, clientes ni personas. Lo que falte: [Pendiente: …]
+  4. Si enseñas datos para explicar la forma, etiquétalos como "Datos de ejemplo".
+  5. Enlaces y assets siempre relativos, sin barra inicial: ../css/style.css, ../index.html
+  6. Enlaza el caso nuevo desde index.html, en la sección que corresponda.
+-->
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">DV</span>
+        <span>Andrea Hidalgo</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="../index.html#ruta">Ruta</a>
+        <a href="../index.html#casos">Casos</a>
+        <a href="../index.html#contacto">Contacto</a>
+        <a href="https://github.com/HidalgosCode27" target="_blank" rel="noopener">GitHub<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Activar tema oscuro">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke-linecap="round"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+  </header>
+  <main id="contenido" class="page">
+    <article class="wrap">
+      <header class="case-hero">
+        <p class="kicker">Plantilla · no es un caso</p>
+        <p class="ribbon">Plantilla</p>
+        <h1>[Pendiente: título del caso]</h1>
+        <p class="lede">Duplica este archivo para un caso nuevo. Esta página no forma parte de los casos publicados en la portada.</p>
+        <ul class="chips">
+          <li>[Pendiente: herramienta]</li>
+        </ul>
+      </header>
+      <div class="case-body">
+        <h2>Contexto</h2>
+        <p><span class="pending">[Pendiente: dónde ocurre y para quién, sin nombrar clientes]</span></p>
+
+        <h2>Problema</h2>
+        <p><span class="pending">[Pendiente: qué no se podía ver o decidir]</span></p>
+
+        <h2>Qué hice</h2>
+        <p><span class="pending">[Pendiente: qué construiste, en una frase comprobable]</span></p>
+        <p class="example-banner" role="note">Datos de ejemplo. Borra este aviso si el caso no muestra cifras. Si muestra cifras reales, no uses este aviso: reserva «Datos de ejemplo» para lo inventado.</p>
+
+        <h2>Herramientas</h2>
+        <ul class="chips">
+          <li>[Pendiente: herramienta]</li>
+        </ul>
+
+        <h2>Resultado</h2>
+        <p><span class="pending">[Pendiente: efecto medido]</span></p>
+
+        <nav class="pager" aria-label="Volver">
+          <a href="../index.html#casos">← Casos</a>
+          <a href="index.html">Índice de casos →</a>
+        </nav>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Andrea Hidalgo · Valencia</p>
+      <p><a href="../index.html">Portada</a></p>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
